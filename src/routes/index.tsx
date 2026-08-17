@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-import heroImage from "@/assets/estufa-hero.jpg";
+import { CoverArt } from "@/components/CoverArt";
 import { ReleasesPanel } from "@/components/ReleasesPanel";
-import { CONTACT_EMAIL } from "@/data/estufa";
+import { CONTACT_EMAIL, releases } from "@/data/estufa";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -11,7 +11,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Estufa Records é uma gravadora independente de música eletrônica de Florianópolis: house, minimal, electro e techno.",
+          "Estufa Records: gravadora independente de música eletrônica de Florianópolis, nos subgêneros house, minimal, electro e techno.",
       },
       { property: "og:title", content: "Estufa Records — gravadora independente" },
       {
@@ -23,98 +23,112 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const links = [
-  { to: "/artists", label: "Artists", desc: "Espécies raras do casting" },
-  { to: "/estufa-radio", label: "Estufa Radio", desc: "Mixes e episódios" },
-  { to: "/send-your-music", label: "Send your music", desc: "Envie sua demo" },
+const pages = [
+  { to: "/artists", label: "Artists", desc: "Casting da gravadora", color: "bg-est-blue" },
+  { to: "/estufa-radio", label: "Estufa Radio", desc: "Mixes e episódios", color: "bg-est-green" },
+  { to: "/send-your-music", label: "Send your music", desc: "Envie sua demo", color: "bg-est-yellow" },
 ] as const;
 
 function Index() {
+  const featured = releases.slice(0, 4);
+
   return (
     <div>
-      <section className="relative overflow-hidden border-b border-border">
-        <img
-          src={heroImage}
-          alt="Estufa industrial à noite com plantas em silhueta e luz verde"
-          width={1600}
-          height={1008}
-          className="absolute inset-0 h-full w-full object-cover opacity-45"
-        />
-        <div className="fog-overlay absolute inset-0" />
+      {/* Hero geométrico no estilo das capas da Estufa */}
+      <section className="relative overflow-hidden border-b-2 border-foreground bg-est-ink">
+        <svg
+          viewBox="0 0 1200 500"
+          preserveAspectRatio="xMidYMid slice"
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full"
+        >
+          <rect width="1200" height="500" fill="var(--est-ink)" />
+          <path d="M0 500 L0 250 L260 120 L520 500Z" fill="var(--est-blue)" />
+          <path d="M760 500 L900 140 L1040 500Z" fill="var(--est-green)" />
+          <rect x="1000" y="60" width="200" height="200" fill="var(--est-red)" />
+          <circle cx="1100" cy="160" r="58" fill="var(--est-yellow)" />
+          <path d="M420 500 L700 300 L760 500Z" fill="var(--est-sand)" opacity="0.9" />
+          <rect x="300" y="40" width="26" height="460" fill="var(--est-yellow)" />
+        </svg>
+        <div className="absolute inset-0 bg-est-ink/55" />
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:py-32">
-          <p className="label-mono text-primary">Florianópolis · desde 2018</p>
-          <h1 className="mt-4 max-w-3xl text-5xl font-semibold leading-[0.95] sm:text-7xl">
+          <p className="label-mono text-est-yellow">Florianópolis · SC · Brasil</p>
+          <h1 className="mt-4 max-w-3xl text-5xl font-bold uppercase leading-[0.9] sm:text-7xl">
             Estufa de
             <br />
             espécies raras
           </h1>
-          <p className="mt-6 max-w-xl text-base text-muted-foreground sm:text-lg">
-            Gravadora independente de música eletrônica trabalhando nos subgêneros house, minimal,
-            electro e techno.
+          <p className="mt-6 max-w-xl text-base sm:text-lg">
+            Gravadora independente de música eletrônica que trabalha nos subgêneros{" "}
+            <span className="text-est-yellow">house, minimal, electro</span> e{" "}
+            <span className="text-est-yellow">techno</span>.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              to="/send-your-music"
-              className="label-mono rounded-sm bg-primary px-5 py-3 text-primary-foreground transition-opacity hover:opacity-90"
-            >
+            <Link to="/send-your-music" className="btn-flat bg-est-red text-est-sand">
               Send your music
             </Link>
-            <a
-              href={`mailto:${CONTACT_EMAIL}`}
-              className="label-mono rounded-sm border border-border px-5 py-3 text-foreground transition-colors hover:bg-secondary"
-            >
-              {CONTACT_EMAIL}
-            </a>
+            <Link to="/artists" className="btn-flat bg-est-sand text-est-ink">
+              Artists
+            </Link>
+            <Link to="/estufa-radio" className="btn-flat bg-est-green text-est-sand">
+              Estufa Radio
+            </Link>
           </div>
         </div>
       </section>
 
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 lg:grid-cols-[1fr_380px]">
-        <div className="space-y-10">
+      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 lg:grid-cols-[1fr_400px]">
+        <div className="space-y-12">
           <section>
-            <h2 className="label-mono text-primary">Nosso conceito</h2>
-            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              A Estufa cultiva som em ambiente controlado: cada release nasce de um processo lento,
-              com foco em texturas úmidas, grooves longos e maquinário analógico. Um catálogo pequeno
-              e cuidado, feito para pistas escuras.
+            <h2 className="label-mono text-est-yellow">Nosso conceito</h2>
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed">
+              A Estufa é uma gravadora independente de música eletrônica. Ambiente controlado, catálogo
+              cultivado com calma: arquitetura, paisagem e cores primárias em cada release.
             </p>
           </section>
 
+          <section>
+            <div className="flex items-baseline justify-between">
+              <h2 className="text-3xl font-bold uppercase">Destaques</h2>
+              <span className="label-mono text-muted-foreground">Estufa Records</span>
+            </div>
+            <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
+              {featured.map((release) => (
+                <article key={release.title} className="panel">
+                  <CoverArt
+                    variant={release.art}
+                    title={release.title}
+                    artists={release.artists}
+                    className="block w-full border-b-2 border-foreground"
+                  />
+                  <div className="p-3">
+                    <h3 className="truncate text-sm font-bold uppercase">{release.title}</h3>
+                    <p className="truncate text-xs text-muted-foreground">{release.artists}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
           <section className="grid gap-4 sm:grid-cols-3">
-            {links.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className="group rounded-lg border border-border bg-card p-5 transition-colors hover:border-primary"
-              >
-                <span className="label-mono text-muted-foreground group-hover:text-primary">
-                  {item.label}
-                </span>
-                <span className="mt-3 block text-sm text-muted-foreground">{item.desc}</span>
+            {pages.map((item) => (
+              <Link key={item.to} to={item.to} className="panel group p-5">
+                <span className={`block size-8 border-2 border-foreground ${item.color}`} />
+                <span className="label-mono mt-4 block group-hover:text-est-yellow">{item.label}</span>
+                <span className="mt-2 block text-sm text-muted-foreground">{item.desc}</span>
               </Link>
             ))}
           </section>
 
-          <section className="rounded-lg border border-border bg-card p-6">
-            <h2 className="text-2xl font-semibold">FAQ</h2>
-            <dl className="mt-5 space-y-5 text-sm">
-              <div>
-                <dt className="font-medium">Como devo enviar minha música?</dt>
-                <dd className="mt-1 text-muted-foreground">
-                  Link ou arquivo, através do email {CONTACT_EMAIL}.
-                </dd>
-              </div>
-              <div>
-                <dt className="font-medium">Em que formato?</dt>
-                <dd className="mt-1 text-muted-foreground">320 kbps, wav ou mp3.</dd>
-              </div>
-              <div>
-                <dt className="font-medium">Se minha música não estiver concluída, devo enviar?</dt>
-                <dd className="mt-1 text-muted-foreground">
-                  Sugerimos concluir a criação antes de enviar para análise da gravadora.
-                </dd>
-              </div>
-            </dl>
+          <section className="panel p-6">
+            <h2 className="text-2xl font-bold uppercase">Contato</h2>
+            <p className="mt-3 text-sm text-muted-foreground">demos / infos</p>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="mt-2 block break-all text-xl font-bold text-est-yellow hover:underline"
+            >
+              {CONTACT_EMAIL}
+            </a>
           </section>
         </div>
 
