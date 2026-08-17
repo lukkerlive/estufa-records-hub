@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArtistsRouteImport } from './routes/artists'
+import { Route as EstufaRadioRouteImport } from './routes/estufa-radio'
+import { Route as SendYourMusicRouteImport } from './routes/send-your-music'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArtistsRoute = ArtistsRouteImport.update({
+  id: '/artists',
+  path: '/artists',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstufaRadioRoute = EstufaRadioRouteImport.update({
+  id: '/estufa-radio',
+  path: '/estufa-radio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SendYourMusicRoute = SendYourMusicRouteImport.update({
+  id: '/send-your-music',
+  path: '/send-your-music',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/artists': typeof ArtistsRoute
+  '/estufa-radio': typeof EstufaRadioRoute
+  '/send-your-music': typeof SendYourMusicRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/artists': typeof ArtistsRoute
+  '/estufa-radio': typeof EstufaRadioRoute
+  '/send-your-music': typeof SendYourMusicRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/artists': typeof ArtistsRoute
+  '/estufa-radio': typeof EstufaRadioRoute
+  '/send-your-music': typeof SendYourMusicRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/artists' | '/estufa-radio' | '/send-your-music'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/artists' | '/estufa-radio' | '/send-your-music'
+  id: '__root__' | '/' | '/artists' | '/estufa-radio' | '/send-your-music'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ArtistsRoute: typeof ArtistsRoute
+  EstufaRadioRoute: typeof EstufaRadioRoute
+  SendYourMusicRoute: typeof SendYourMusicRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/artists': {
+      id: '/artists'
+      path: '/artists'
+      fullPath: '/artists'
+      preLoaderRoute: typeof ArtistsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estufa-radio': {
+      id: '/estufa-radio'
+      path: '/estufa-radio'
+      fullPath: '/estufa-radio'
+      preLoaderRoute: typeof EstufaRadioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/send-your-music': {
+      id: '/send-your-music'
+      path: '/send-your-music'
+      fullPath: '/send-your-music'
+      preLoaderRoute: typeof SendYourMusicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ArtistsRoute: ArtistsRoute,
+  EstufaRadioRoute: EstufaRadioRoute,
+  SendYourMusicRoute: SendYourMusicRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
