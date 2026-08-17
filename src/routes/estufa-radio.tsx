@@ -1,14 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import { CoverArt } from "@/components/CoverArt";
 import { radioShows, CONTACT_EMAIL } from "@/data/estufa";
 
 export const Route = createFileRoute("/estufa-radio")({
   head: () => ({
     meta: [
-      { title: "Estufa Radio — mixes e episódios" },
+      { title: "Estufa Radio — mixes da gravadora" },
       {
         name: "description",
-        content: "Estufa Radio: série de mixes da gravadora com residentes e convidados.",
+        content: "Estufa Radio: série de mixes da Estufa Records com residentes e convidados.",
       },
       { property: "og:title", content: "Estufa Radio" },
       { property: "og:description", content: "Série de mixes da Estufa Records." },
@@ -19,30 +20,34 @@ export const Route = createFileRoute("/estufa-radio")({
 
 function RadioPage() {
   return (
-    <div className="mx-auto max-w-7xl px-5 py-16">
-      <p className="label-mono text-primary">Série de mixes</p>
-      <h1 className="mt-3 text-4xl font-semibold sm:text-5xl">Estufa Radio</h1>
-      <p className="mt-4 max-w-xl text-muted-foreground">
-        Sessões gravadas por residentes e convidados. Um episódio novo sempre que a estufa aquece.
+    <div className="mx-auto max-w-7xl px-5 py-14">
+      <p className="label-mono text-est-yellow">Série de mixes</p>
+      <h1 className="mt-3 text-5xl font-bold uppercase sm:text-6xl">Estufa Radio</h1>
+      <div className="rule-primaries mt-6 max-w-md" />
+      <p className="mt-6 max-w-xl text-muted-foreground">
+        Sessões gravadas por residentes e convidados da gravadora. House, minimal, electro e techno.
       </p>
 
-      <ul className="mt-10 divide-y divide-border overflow-hidden rounded-lg border border-border bg-card">
-        {radioShows.map((show) => (
-          <li key={show.episode} className="flex flex-wrap items-center gap-3 p-5">
-            <div className="min-w-0 flex-1">
-              <h2 className="text-lg font-medium">{show.episode}</h2>
-              <p className="text-sm text-muted-foreground">
-                {show.host} · {show.focus}
+      <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+        {radioShows.map((show, i) => (
+          <li key={show.episode} className="panel flex items-stretch">
+            <div className="w-28 shrink-0 border-r-2 border-foreground">
+              <CoverArt variant={i + 2} title={show.episode} className="block h-full w-full" />
+            </div>
+            <div className="flex flex-1 flex-col justify-center gap-1 p-5">
+              <h2 className="text-lg font-bold uppercase">{show.episode}</h2>
+              <p className="text-sm text-muted-foreground">{show.host}</p>
+              <p className="label-mono mt-2 text-est-yellow">
+                {show.focus} · {show.duration}
               </p>
             </div>
-            <span className="label-mono text-primary">{show.duration}</span>
           </li>
         ))}
       </ul>
 
-      <p className="mt-8 text-sm text-muted-foreground">
+      <p className="mt-10 text-sm text-muted-foreground">
         Quer apresentar um episódio? Escreva para{" "}
-        <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary hover:underline">
+        <a href={`mailto:${CONTACT_EMAIL}`} className="text-est-yellow hover:underline">
           {CONTACT_EMAIL}
         </a>
         .
