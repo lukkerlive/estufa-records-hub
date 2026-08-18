@@ -9,8 +9,8 @@ const swatches = ["bg-est-red", "bg-est-yellow", "bg-est-blue", "bg-est-green"];
 
 export function ReleasesPanel() {
   const [selected, setSelected] = useState(0);
-  const release = releases[selected];
-  const embed = release.spotifyId
+  const release = releases[selected] ?? releases[0]!;
+
     ? `https://open.spotify.com/embed/${release.spotifyType ?? "track"}/${release.spotifyId}?theme=0`
     : null;
 
