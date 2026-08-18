@@ -9,9 +9,8 @@ const nav: { to: string; labelKey: TranslationKey; color: string }[] = [
   { to: "/about", labelKey: "nav_about", color: "hover:bg-est-blue hover:text-est-sand" },
   { to: "/artists", labelKey: "nav_artists", color: "hover:bg-est-blue hover:text-est-sand" },
   { to: "/estufa-radio", labelKey: "nav_radio", color: "hover:bg-est-green hover:text-est-sand" },
-  { to: "/eventos", labelKey: "nav_events", color: "hover:bg-est-yellow hover:text-est-ink" },
+  { to: "/cena", labelKey: "nav_cena", color: "hover:bg-est-yellow hover:text-est-ink" },
   { to: "/send-your-music", labelKey: "nav_send", color: "hover:bg-est-yellow hover:text-est-ink" },
-  { to: "/news", labelKey: "nav_news", color: "hover:bg-est-red hover:text-est-sand" },
 ];
 
 function LanguageToggle() {

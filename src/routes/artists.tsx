@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Instagram } from "lucide-react";
 
 import { SocialLinks } from "@/components/SocialLinks";
 import { useI18n } from "@/lib/i18n";
-import { artists, CONTACT_EMAIL, type SocialLink } from "@/data/estufa";
+import { artists, releases, CONTACT_EMAIL, type SocialLink } from "@/data/estufa";
 
 export const Route = createFileRoute("/artists")({
   head: () => ({
@@ -23,6 +24,17 @@ export const Route = createFileRoute("/artists")({
 function ArtistsPage() {
   const { t } = useI18n();
 
+  const releaseIndex = new Map(releases.map((r, i) => [r.title, i]));
+  const ordered = [...artists].sort((a, b) => {
+    const recentA = Math.min(
+      ...a.releases.map((title) => releaseIndex.get(title) ?? Number.MAX_SAFE_INTEGER),
+    );
+    const recentB = Math.min(
+      ...b.releases.map((title) => releaseIndex.get(title) ?? Number.MAX_SAFE_INTEGER),
+    );
+    return recentA - recentB;
+  });
+
   return (
     <div className="mx-auto max-w-7xl px-5 py-14">
       <p className="label-mono text-est-yellow">{t("artists_kicker")}</p>
@@ -31,7 +43,7 @@ function ArtistsPage() {
       <p className="mt-6 max-w-xl text-muted-foreground">{t("artists_desc")}</p>
 
       <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {artists.map((artist) => {
+        {ordered.map((artist) => {
           const artistLinks = artist.socials
             ? Object.entries(artist.socials)
                 .filter((entry): entry is [string, string] => Boolean(entry[1]))
@@ -50,7 +62,20 @@ function ArtistsPage() {
                 className="block aspect-square w-full object-cover"
               />
               <div className="p-5">
-                <h2 className="text-xl font-bold uppercase">{artist.name}</h2>
+                <div className="flex flex-wrap items-center gap-2">
+                  <h2 className="text-xl font-bold uppercase">{artist.name}</h2>
+                  {artist.socials?.instagram && (
+                    <a
+                      href={artist.socials.instagram}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`Instagram de ${artist.name}`}
+                      className="text-est-yellow transition-colors hover:text-est-red"
+                    >
+                      <Instagram className="size-4" aria-hidden="true" />
+                    </a>
+                  )}
+                </div>
                 {artistLinks.length > 0 && (
                   <SocialLinks
                     links={artistLinks}

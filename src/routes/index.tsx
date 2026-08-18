@@ -1,14 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import {
-  CalendarDays,
-  ChevronLeft,
-  ChevronRight,
-  Newspaper,
-  Radio,
-  Send,
-  Users,
-} from "lucide-react";
+import { CalendarDays, ChevronLeft, ChevronRight, Radio, Send, Users } from "lucide-react";
 
 import bgAsset from "@/assets/estufa-bg.webp.asset.json";
 import logoRedAsset from "@/assets/estufa-logo-red.jpg.asset.json";
@@ -53,9 +45,8 @@ const pages: {
 }[] = [
   { to: "/artists", labelKey: "nav_artists", descKey: "pages_artists_desc", icon: Users },
   { to: "/estufa-radio", labelKey: "nav_radio", descKey: "pages_radio_desc", icon: Radio },
-  { to: "/eventos", labelKey: "nav_events", descKey: "pages_events_desc", icon: CalendarDays },
+  { to: "/cena", labelKey: "nav_cena", descKey: "pages_cena_desc", icon: CalendarDays },
   { to: "/send-your-music", labelKey: "nav_send", descKey: "pages_send_desc", icon: Send },
-  { to: "/news", labelKey: "nav_news", descKey: "pages_news_desc", icon: Newspaper },
 ];
 
 const PER_PAGE = 4;

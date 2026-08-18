@@ -42,7 +42,9 @@ function AboutPage() {
         </div>
         <div className="flex flex-col justify-center gap-2">
           <p className="label-mono text-muted-foreground">{t("about_history_label")}</p>
-          <p className="text-sm leading-relaxed text-muted-foreground">{pick(about.intro, lang)}</p>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            {pick(about.history, lang)}
+          </p>
         </div>
       </section>
 
@@ -78,12 +80,8 @@ function AboutPage() {
           {t("nav_artists")}
         </Link>{" "}
         ·{" "}
-        <Link to="/eventos" className="text-est-yellow hover:underline">
-          {t("nav_events")}
-        </Link>{" "}
-        ·{" "}
-        <Link to="/news" className="text-est-yellow hover:underline">
-          {t("nav_news")}
+        <Link to="/cena" className="text-est-yellow hover:underline">
+          {t("nav_cena")}
         </Link>
       </p>
     </div>

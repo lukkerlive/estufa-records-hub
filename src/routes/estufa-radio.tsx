@@ -10,6 +10,7 @@ import {
   releases,
   radioShows,
   soundcloudSearchUrl,
+  spotifyEmbedUrl,
   spotifyUrl,
   CONTACT_EMAIL,
 } from "@/data/estufa";
@@ -89,7 +90,7 @@ function RadioPage() {
         </ul>
       </section>
 
-      {/* Lançamentos oficiais com capas + player SoundCloud quando lançados */}
+      {/* Lançamentos oficiais com capas + player Spotify quando disponível */}
       <section className="mt-14">
         <h2 className="label-mono text-est-red">{t("radio_releases")}</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -124,15 +125,19 @@ function RadioPage() {
                   </a>
                 </div>
               </div>
-              {release.soundcloudUrl && (
+              {spotifyEmbedUrl(release) && (
                 <div className="border-t border-border p-4">
                   <iframe
-                    title={`SoundCloud — ${release.title}`}
-                    src={soundcloudEmbedUrl(release.soundcloudUrl)}
+                    title={`Spotify — ${release.title}`}
+                    src={spotifyEmbedUrl(release)!}
                     width="100%"
-                    height="120"
+                    height={
+                      release.spotifyType === "album" || release.spotifyType === "playlist"
+                        ? 152
+                        : 80
+                    }
                     loading="lazy"
-                    allow="autoplay"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                     className="block w-full border border-border"
                   />
                 </div>

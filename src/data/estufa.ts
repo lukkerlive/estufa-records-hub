@@ -402,21 +402,26 @@ export type RadioShow = {
 
 export const radioShows: RadioShow[] = [
   {
-    episode: "Estufa Radio 04",
-    host: "Noizzed",
-    focus: "minimal & dub techno",
-    duration: "62 min",
+    episode: "PodaCast #01 — Le Calve",
+    host: "Le Calve",
+    focus: "podcast",
+    duration: "mix",
+    soundcloudUrl: "https://soundcloud.com/estufarec/podacast-01-le-calve",
   },
-  { episode: "Estufa Radio 03", host: "César Leme", focus: "deep house", duration: "58 min" },
-  { episode: "Estufa Radio 02", host: "Lapax", focus: "electro", duration: "71 min" },
-  { episode: "Estufa Radio 01", host: "Auxtin", focus: "techno", duration: "64 min" },
   {
-    episode: "PodCast #02 — noizzed b2b arnt",
+    episode: "PodaCast #02 — noizzed b2b arnt",
     host: "noizzed, arnt",
     focus: "podcast",
     duration: "mix",
     cover: "/covers/podcast-noizzed-arnt.jpg",
     soundcloudUrl: "https://soundcloud.com/estufarec/noizzed-arnt",
+  },
+  {
+    episode: "PodaCast #03 — Moka & Silvy",
+    host: "Moka & Silvy",
+    focus: "podcast",
+    duration: "mix",
+    soundcloudUrl: "https://soundcloud.com/estufarec/mokasilvy",
   },
 ];
 
@@ -466,6 +471,11 @@ export function spotifyUrl(release: Release) {
     return `https://open.spotify.com/${release.spotifyType ?? "track"}/${release.spotifyId}`;
   }
   return spotifySearchUrl(release);
+}
+
+export function spotifyEmbedUrl(release: Release) {
+  if (!release.spotifyId) return null;
+  return `https://open.spotify.com/embed/${release.spotifyType ?? "track"}/${release.spotifyId}`;
 }
 
 export function spotifySearchUrl(release: Release) {
@@ -670,6 +680,10 @@ export const about = {
   intro: {
     pt: "A Estufa Records é uma gravadora independente de música eletrônica fundada em 2018 em Florianópolis/SC. Trabalhamos com os subgêneros house, minimal, electro e techno, cultivando um catálogo próprio, com calma e curadoria — como uma estufa de espécies raras.",
     en: "Estufa Records is an independent electronic music label founded in 2018 in Florianópolis/SC. We work across house, minimal, electro and techno, growing our own catalog slowly and with care — like a greenhouse of rare species.",
+  },
+  history: {
+    pt: "Nascida em 2018 em Florianópolis, a estufa começou como um espaço de formação e experimentação para produtores locais. Desde então, cultivamos um catálogo próprio com lançamentos de house, minimal, electro e techno, realizamos workshops, masterclasses e showcases com artistas do casting e fomos reconhecidos pelo Sebrae como startup inovadora na cena cultural.",
+    en: "Born in 2018 in Florianópolis, the greenhouse started as a space for training and experimentation for local producers. Since then, we have grown our own catalog across house, minimal, electro and techno, run workshops, masterclasses and showcases with roster artists, and were recognized by Sebrae as an innovative startup in the cultural scene.",
   },
   pillars: [
     {

@@ -6,9 +6,8 @@ import { CONTACT_EMAIL, socialLinks } from "@/data/estufa";
 
 const involved: { to: string; labelKey: TranslationKey }[] = [
   { to: "/send-your-music", labelKey: "nav_send" },
-  { to: "/eventos", labelKey: "nav_events" },
+  { to: "/cena", labelKey: "nav_cena" },
   { to: "/artists", labelKey: "nav_artists" },
-  { to: "/news", labelKey: "nav_news" },
 ];
 
 export function SiteFooter() {
