@@ -44,7 +44,7 @@ function SendMusicPage() {
         {steps.map((step, i) => (
           <li key={step.text} className="panel flex items-center gap-4 p-5">
             <span
-              className={`flex size-10 shrink-0 items-center justify-center border-2 border-foreground text-sm font-bold text-est-ink ${step.color}`}
+              className={`flex size-10 shrink-0 items-center justify-center border border-border text-sm font-bold text-est-ink ${step.color}`}
             >
               0{i + 1}
             </span>
@@ -67,7 +67,7 @@ function SendMusicPage() {
         <h2 className="text-3xl font-bold uppercase">FAQ</h2>
         <dl className="mt-6 space-y-5">
           {faq.map((item) => (
-            <div key={item.q} className="border-l-4 border-est-green pl-4">
+            <div key={item.q} className="border-l-2 border-est-green pl-4">
               <dt className="font-bold">{item.q}</dt>
               <dd className="mt-1 text-sm text-muted-foreground">{item.a}</dd>
             </div>

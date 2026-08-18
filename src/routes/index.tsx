@@ -35,7 +35,7 @@ function Index() {
   return (
     <div>
       {/* Hero geométrico no estilo das capas da Estufa */}
-      <section className="relative overflow-hidden border-b-2 border-foreground bg-est-ink">
+      <section className="relative overflow-hidden border-b border-border bg-est-ink">
         <svg
           viewBox="0 0 1200 500"
           preserveAspectRatio="xMidYMid slice"
@@ -99,7 +99,7 @@ function Index() {
                     variant={release.art}
                     title={release.title}
                     artists={release.artists}
-                    className="block w-full border-b-2 border-foreground"
+                    className="block w-full border-b border-border"
                   />
                   <div className="p-3">
                     <h3 className="truncate text-sm font-bold uppercase">{release.title}</h3>
@@ -113,7 +113,7 @@ function Index() {
           <section className="grid gap-4 sm:grid-cols-3">
             {pages.map((item) => (
               <Link key={item.to} to={item.to} className="panel group p-5">
-                <span className={`block size-8 border-2 border-foreground ${item.color}`} />
+                <span className={`block size-8 border border-border ${item.color}`} />
                 <span className="label-mono mt-4 block group-hover:text-est-yellow">{item.label}</span>
                 <span className="mt-2 block text-sm text-muted-foreground">{item.desc}</span>
               </Link>

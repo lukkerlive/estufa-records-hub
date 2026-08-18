@@ -7,7 +7,7 @@ export function ReleasesPanel() {
   return (
     <aside className="panel lg:sticky lg:top-24">
       <div className="rule-primaries" />
-      <div className="flex items-baseline justify-between border-b-2 border-foreground px-5 py-4">
+      <div className="flex items-baseline justify-between border-b border-border px-5 py-4">
         <h2 className="text-2xl font-bold uppercase tracking-tight">Releases</h2>
         <span className="label-mono text-est-yellow">Últimos lançamentos</span>
       </div>
@@ -18,7 +18,7 @@ export function ReleasesPanel() {
               href={`mailto:estufarec@gmail.com?subject=${encodeURIComponent(release.title)}`}
               className="group flex items-center gap-4 px-4 py-3 transition-colors hover:bg-secondary"
             >
-              <span className="w-14 shrink-0 border-2 border-foreground">
+              <span className="w-14 shrink-0 border border-border">
                 <CoverArt
                   variant={release.art}
                   title={release.title}
@@ -37,7 +37,7 @@ export function ReleasesPanel() {
           </li>
         ))}
       </ol>
-      <div className="border-t-2 border-foreground px-5 py-3">
+      <div className="border-t border-border px-5 py-3">
         <span className="label-mono text-muted-foreground">Estufa Records</span>
       </div>
     </aside>

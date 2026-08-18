@@ -31,7 +31,7 @@ function RadioPage() {
       <ul className="mt-10 grid gap-4 sm:grid-cols-2">
         {radioShows.map((show, i) => (
           <li key={show.episode} className="panel flex items-stretch">
-            <div className="w-28 shrink-0 border-r-2 border-foreground">
+            <div className="w-28 shrink-0 border-r border-border">
               <CoverArt variant={i + 2} title={show.episode} className="block h-full w-full" />
             </div>
             <div className="flex flex-1 flex-col justify-center gap-1 p-5">

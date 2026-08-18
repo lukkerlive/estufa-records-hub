@@ -9,11 +9,11 @@ const nav = [
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b-2 border-foreground bg-background/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
       <div className="rule-primaries" />
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-5 py-4">
         <Link to="/" className="flex items-center gap-3">
-          <span className="grid size-8 shrink-0 grid-cols-2 grid-rows-2 border-2 border-foreground">
+          <span className="grid size-8 shrink-0 grid-cols-2 grid-rows-2 border border-border">
             <span className="bg-est-red" />
             <span className="bg-est-yellow" />
             <span className="bg-est-blue" />
@@ -29,7 +29,7 @@ export function SiteHeader() {
               key={item.to}
               to={item.to}
               activeOptions={{ exact: item.to === "/" }}
-              className={`label-mono border-2 border-foreground px-3 py-2 transition-colors ${item.color}`}
+              className={`label-mono border border-border px-3 py-2 transition-colors ${item.color}`}
               activeProps={{ className: "bg-foreground text-est-ink" }}
             >
               {item.label}
