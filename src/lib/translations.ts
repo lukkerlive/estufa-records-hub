@@ -23,6 +23,9 @@ export const translations = {
     concept_text:
       "A Estufa é uma gravadora independente de música eletrônica. Ambiente controlado, catálogo cultivado com calma: arquitetura, paisagem e cores primárias em cada release.",
     featured_label: "Destaques",
+    releases_label: "Releases",
+    playlist_label: "Playlist oficial",
+    playlist_sub: "Toda a estufa em uma playlist — Spotify",
     pages_artists_desc: "Casting da gravadora",
     pages_radio_desc: "Mixes e episódios",
     pages_send_desc: "Envie sua demo",
@@ -92,6 +95,7 @@ export const translations = {
     events_type_masterclass: "Masterclass",
     events_type_showcase: "Showcase",
     events_type_party: "Festa",
+    events_photos: "Fotos no Instagram",
 
     news_kicker: "Novidades",
     news_title: "News",
@@ -123,6 +127,9 @@ export const translations = {
     concept_text:
       "Estufa is an independent electronic music label. A controlled environment, a catalog grown slowly: architecture, landscape and primary colors in every release.",
     featured_label: "Featured",
+    releases_label: "Releases",
+    playlist_label: "Official playlist",
+    playlist_sub: "The whole greenhouse in one playlist — Spotify",
     pages_artists_desc: "Label roster",
     pages_radio_desc: "Mixes & episodes",
     pages_send_desc: "Send your demo",
@@ -191,6 +198,7 @@ export const translations = {
     events_type_masterclass: "Masterclass",
     events_type_showcase: "Showcase",
     events_type_party: "Party",
+    events_photos: "Photos on Instagram",
 
     news_kicker: "News",
     news_title: "News",

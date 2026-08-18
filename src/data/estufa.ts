@@ -492,6 +492,10 @@ export type EventItem = {
   venue?: string;
   description: Localized;
   partners?: string[];
+  /** Fotos do evento (arquivos locais em /public/events). */
+  photos?: string[];
+  /** Link do post original no Instagram. */
+  instagramUrl?: string;
 };
 
 export const events: EventItem[] = [
@@ -527,6 +531,8 @@ export const events: EventItem[] = [
       pt: "Roda de conversa, networking e open decks para DJs, produtores e artistas: identidade artística, produção musical e direitos autorais, mixagem com vinil, produção de eventos e saúde mental.",
       en: "Talk circle, networking and open decks for DJs, producers and artists: artistic identity, music production and copyright, vinyl mixing, event production and mental health.",
     },
+    photos: ["/events/masterclass-hangar-t6.webp"],
+    instagramUrl: "https://www.instagram.com/p/C-Y70-9sNhz/",
   },
   {
     id: "workshop-showcase-mada",
@@ -561,6 +567,8 @@ export const events: EventItem[] = [
       en: '"Introduction to music production" workshop (preparation, mastering, release and copyright) + showcase of Raquel Zanella\'s debut EP. The venue also served as a donation point for the flood victims in RS.',
     },
     partners: ["Raquel Zanella"],
+    photos: ["/events/hangar-t6-workshop-1.jpg", "/events/hangar-t6-workshop-2.jpg"],
+    instagramUrl: "https://www.instagram.com/p/C7VClMpsQo_/",
   },
   {
     id: "fritadeira-eletronica",
@@ -575,6 +583,8 @@ export const events: EventItem[] = [
       en: "Open-air carnival block bringing together collectives Chama No BocaBoca, Duna, Estufa Rec., Gritaria, Slut Rave and Tontura.",
     },
     partners: ["Chama No BocaBoca", "Duna", "Gritaria", "Slut Rave", "Tontura"],
+    photos: ["/events/fritadeira-eletronica.webp"],
+    instagramUrl: "https://www.instagram.com/p/C3oJFCqMBIM/",
   },
 ];
 

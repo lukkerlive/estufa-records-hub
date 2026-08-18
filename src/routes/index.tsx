@@ -4,10 +4,16 @@ import { CalendarDays, Newspaper, Radio, Send, Users } from "lucide-react";
 import bgAsset from "@/assets/estufa-bg.webp.asset.json";
 import logoRedAsset from "@/assets/estufa-logo-red.jpg.asset.json";
 import { CoverArt } from "@/components/CoverArt";
-import { ReleasesPanel } from "@/components/ReleasesPanel";
 import { SocialLinks } from "@/components/SocialLinks";
 import { useI18n, type TranslationKey } from "@/lib/i18n";
-import { CONTACT_EMAIL, releases, socialLinks } from "@/data/estufa";
+import {
+  CONTACT_EMAIL,
+  SPOTIFY_PLAYLIST_ID,
+  beatportUrl,
+  releases,
+  socialLinks,
+  spotifyUrl,
+} from "@/data/estufa";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -44,7 +50,37 @@ const pages: {
 
 function Index() {
   const { t } = useI18n();
-  const featured = releases.slice(0, 4);
+
+  const coverRow = (dup: number, ariaHidden: boolean) => (
+    <div key={dup} aria-hidden={ariaHidden} className="flex shrink-0">
+      {releases.map((release) => (
+        <div key={`${dup}-${release.title}`} className="w-56 shrink-0 pr-4 sm:w-64">
+          <a
+            href={beatportUrl(release) ?? spotifyUrl(release)}
+            target="_blank"
+            rel="noreferrer"
+            className="group block border border-border bg-card transition-colors hover:bg-secondary"
+          >
+            <CoverArt
+              variant={release.art}
+              cover={release.cover}
+              title={release.title}
+              artists={release.artists}
+              className="block w-full border-b border-border"
+            />
+            <div className="p-2.5">
+              <p className="truncate text-xs font-bold uppercase group-hover:text-est-yellow">
+                {release.title}
+              </p>
+              <p className="truncate text-[11px] text-muted-foreground">{release.artists}</p>
+            </div>
+          </a>
+        </div>
+      ))}
+    </div>
+  );
+
+  const embed = `https://open.spotify.com/embed/playlist/${SPOTIFY_PLAYLIST_ID}?utm_source=generator&theme=0`;
 
   return (
     <div>
@@ -92,70 +128,74 @@ function Index() {
         </div>
       </section>
 
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 lg:grid-cols-[1fr_400px]">
-        <div className="space-y-12">
-          <section>
-            <h2 className="label-mono text-est-yellow">{t("concept_label")}</h2>
-            <p className="mt-4 max-w-2xl text-lg leading-relaxed">{t("concept_text")}</p>
-          </section>
-
-          <section>
-            <div className="flex items-baseline justify-between">
-              <h2 className="text-3xl font-bold uppercase">{t("featured_label")}</h2>
-              <span className="label-mono text-muted-foreground">{t("brand")}</span>
-            </div>
-            <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-              {featured.map((release) => (
-                <article key={release.title} className="panel">
-                  <CoverArt
-                    variant={release.art}
-                    cover={release.cover}
-                    title={release.title}
-                    artists={release.artists}
-                    className="block w-full border-b border-border"
-                  />
-                  <div className="p-3">
-                    <h3 className="truncate text-sm font-bold uppercase">{release.title}</h3>
-                    <p className="truncate text-xs text-muted-foreground">{release.artists}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {pages.map((item) => {
-              const Icon = item.icon;
-              return (
-                <Link key={item.to} to={item.to} className="panel group p-5">
-                  <span className="flex size-8 items-center justify-center border border-border text-est-red">
-                    <Icon className="size-4" aria-hidden="true" />
-                  </span>
-                  <span className="label-mono mt-4 block group-hover:text-est-yellow">
-                    {t(item.labelKey)}
-                  </span>
-                  <span className="mt-2 block text-sm text-muted-foreground">
-                    {t(item.descKey)}
-                  </span>
-                </Link>
-              );
-            })}
-          </section>
-
-          <section className="panel p-6">
-            <h2 className="text-2xl font-bold uppercase">{t("contact_label")}</h2>
-            <p className="mt-3 text-sm text-muted-foreground">{t("contact_sub")}</p>
-            <a
-              href={`mailto:${CONTACT_EMAIL}`}
-              className="mt-2 block break-all text-xl font-bold text-est-yellow hover:underline"
-            >
-              {CONTACT_EMAIL}
-            </a>
-          </section>
+      {/* Capas dos releases grandes, rodando em carrossel horizontal */}
+      <section className="border-b border-border bg-est-ink">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-baseline justify-between gap-2 px-5 pt-8">
+          <h2 className="text-3xl font-bold uppercase text-est-sand">{t("releases_label")}</h2>
+          <span className="label-mono text-est-sand">{t("brand")}</span>
         </div>
+        <div className="mt-6 overflow-hidden border-t border-border py-8">
+          <div className="marquee-track flex w-max">
+            {coverRow(0, false)}
+            {coverRow(1, true)}
+          </div>
+        </div>
+      </section>
 
-        <ReleasesPanel />
+      <div className="mx-auto max-w-7xl space-y-12 px-5 py-14">
+        <section>
+          <h2 className="label-mono text-est-yellow">{t("concept_label")}</h2>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed">{t("concept_text")}</p>
+        </section>
+
+        <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {pages.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Link key={item.to} to={item.to} className="panel group p-5">
+                <span className="flex size-8 items-center justify-center border border-border text-est-red">
+                  <Icon className="size-4" aria-hidden="true" />
+                </span>
+                <span className="label-mono mt-4 block group-hover:text-est-yellow">
+                  {t(item.labelKey)}
+                </span>
+                <span className="mt-2 block text-sm text-muted-foreground">{t(item.descKey)}</span>
+              </Link>
+            );
+          })}
+        </section>
+
+        <section className="panel p-6">
+          <h2 className="text-2xl font-bold uppercase">{t("contact_label")}</h2>
+          <p className="mt-3 text-sm text-muted-foreground">{t("contact_sub")}</p>
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            className="mt-2 block break-all text-xl font-bold text-est-yellow hover:underline"
+          >
+            {CONTACT_EMAIL}
+          </a>
+        </section>
       </div>
+
+      {/* Playlist oficial, na base da home perto do rodapé */}
+      <section className="border-t border-border bg-est-ink py-14">
+        <div className="mx-auto max-w-7xl px-5">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <h2 className="text-3xl font-bold uppercase text-est-sand">{t("playlist_label")}</h2>
+            <span className="label-mono text-est-sand">{t("playlist_sub")}</span>
+          </div>
+          <div className="rule-primaries mt-4 max-w-md" />
+          <iframe
+            title="Estufa Records — playlist oficial"
+            src={embed}
+            width="100%"
+            height="352"
+            loading="lazy"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            className="mt-6 block w-full border border-border"
+          />
+        </div>
+      </section>
     </div>
   );
 }

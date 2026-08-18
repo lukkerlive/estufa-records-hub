@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Instagram } from "lucide-react";
 
 import { useI18n, pick, type TranslationKey } from "@/lib/i18n";
 import { events, type EventItem } from "@/data/estufa";
@@ -85,6 +86,21 @@ function EventCard({
         {pick(event.city, lang)}
         {event.venue ? ` · ${event.venue}` : ""}
       </p>
+      {event.photos && event.photos.length > 0 && (
+        <div
+          className={`mt-4 grid gap-2 ${event.photos.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}
+        >
+          {event.photos.map((src, i) => (
+            <img
+              key={src}
+              src={src}
+              alt={`${pick(event.title, lang)} — foto ${i + 1}`}
+              loading="lazy"
+              className="aspect-[4/3] w-full border border-border object-cover"
+            />
+          ))}
+        </div>
+      )}
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
         {pick(event.description, lang)}
       </p>
@@ -92,6 +108,17 @@ function EventCard({
         <p className="mt-3 text-sm text-muted-foreground">
           <span className="label-mono text-foreground">·</span> {event.partners.join(" · ")}
         </p>
+      )}
+      {event.instagramUrl && (
+        <a
+          href={event.instagramUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="label-mono mt-4 inline-flex items-center gap-2 text-est-yellow hover:underline"
+        >
+          <Instagram className="size-4" aria-hidden="true" />
+          {t("events_photos")}
+        </a>
       )}
     </li>
   );
