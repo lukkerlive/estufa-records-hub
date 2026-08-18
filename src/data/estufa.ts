@@ -3,6 +3,11 @@ export type Release = {
   title: string;
   artists: string;
   art: number;
+  /** ID da faixa/álbum no Spotify (open.spotify.com/track/<id>) — habilita o player. */
+  spotifyId?: string;
+  spotifyType?: "track" | "album" | "playlist";
+  /** URL direta do release no Beatport. */
+  beatportUrl?: string;
 };
 
 // Catálogo conforme os últimos lançamentos da Estufa Records.
@@ -49,7 +54,16 @@ export const artists: Artist[] = [
   { name: "Mateus G", releases: ["Concreto"] },
 ];
 
-export const radioShows = [
+export type RadioShow = {
+  episode: string;
+  host: string;
+  focus: string;
+  duration: string;
+  /** URL do set no SoundCloud — habilita o player. */
+  soundcloudUrl?: string;
+};
+
+export const radioShows: RadioShow[] = [
   { episode: "Estufa Radio 04", host: "Noizzed", focus: "minimal & dub techno", duration: "62 min" },
   { episode: "Estufa Radio 03", host: "César Leme", focus: "deep house", duration: "58 min" },
   { episode: "Estufa Radio 02", host: "Lapax", focus: "electro", duration: "71 min" },
@@ -57,3 +71,18 @@ export const radioShows = [
 ];
 
 export const CONTACT_EMAIL = "estufarec@gmail.com";
+
+export function spotifySearchUrl(release: Release) {
+  return `https://open.spotify.com/search/${encodeURIComponent(`${release.title} ${release.artists}`)}`;
+}
+
+export function beatportUrl(release: Release) {
+  return (
+    release.beatportUrl ??
+    `https://www.beatport.com/search?q=${encodeURIComponent(`${release.title} ${release.artists}`)}`
+  );
+}
+
+export function soundcloudSearchUrl(show: RadioShow) {
+  return `https://soundcloud.com/search?q=${encodeURIComponent(`estufa records ${show.host}`)}`;
+}

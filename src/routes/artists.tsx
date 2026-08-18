@@ -35,7 +35,7 @@ function ArtistsPage() {
           <li key={artist.name} className="panel p-5">
             <div className="flex items-start justify-between gap-3">
               <h2 className="text-xl font-bold uppercase">{artist.name}</h2>
-              <span className={`size-6 shrink-0 border-2 border-foreground ${colors[i % colors.length]}`} />
+              <span className={`size-6 shrink-0 border border-border ${colors[i % colors.length]}`} />
             </div>
             <p className="label-mono mt-4 text-muted-foreground">Releases</p>
             <ul className="mt-2 space-y-1 text-sm">

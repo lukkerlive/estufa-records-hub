@@ -2,7 +2,7 @@ import { CONTACT_EMAIL } from "@/data/estufa";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-16 border-t-2 border-foreground bg-card">
+    <footer className="mt-16 border-t border-border bg-card">
       <div className="rule-primaries" />
       <div className="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-10 text-sm sm:flex-row sm:items-center sm:justify-between">
         <p className="label-mono text-muted-foreground">Florianópolis · SC · Brasil</p>

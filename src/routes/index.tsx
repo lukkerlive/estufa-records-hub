@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
+import bgAsset from "@/assets/estufa-bg.webp.asset.json";
+import logoRedAsset from "@/assets/estufa-logo-red.jpg.asset.json";
 import { CoverArt } from "@/components/CoverArt";
 import { ReleasesPanel } from "@/components/ReleasesPanel";
 import { CONTACT_EMAIL, releases } from "@/data/estufa";
@@ -34,46 +36,45 @@ function Index() {
 
   return (
     <div>
-      {/* Hero geométrico no estilo das capas da Estufa */}
-      <section className="relative overflow-hidden border-b-2 border-foreground bg-est-ink">
-        <svg
-          viewBox="0 0 1200 500"
-          preserveAspectRatio="xMidYMid slice"
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full"
-        >
-          <rect width="1200" height="500" fill="var(--est-ink)" />
-          <path d="M0 500 L0 250 L260 120 L520 500Z" fill="var(--est-blue)" />
-          <path d="M760 500 L900 140 L1040 500Z" fill="var(--est-green)" />
-          <rect x="1000" y="60" width="200" height="200" fill="var(--est-red)" />
-          <circle cx="1100" cy="160" r="58" fill="var(--est-yellow)" />
-          <path d="M420 500 L700 300 L760 500Z" fill="var(--est-sand)" opacity="0.9" />
-          <rect x="300" y="40" width="26" height="460" fill="var(--est-yellow)" />
-        </svg>
-        <div className="absolute inset-0 bg-est-ink/55" />
-        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:py-32">
-          <p className="label-mono text-est-yellow">Florianópolis · SC · Brasil</p>
-          <h1 className="mt-4 max-w-3xl text-5xl font-bold uppercase leading-[0.9] sm:text-7xl">
-            Estufa de
-            <br />
-            espécies raras
-          </h1>
-          <p className="mt-6 max-w-xl text-base sm:text-lg">
-            Gravadora independente de música eletrônica que trabalha nos subgêneros{" "}
-            <span className="text-est-yellow">house, minimal, electro</span> e{" "}
-            <span className="text-est-yellow">techno</span>.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/send-your-music" className="btn-flat bg-est-red text-est-sand">
-              Send your music
-            </Link>
-            <Link to="/artists" className="btn-flat bg-est-sand text-est-ink">
-              Artists
-            </Link>
-            <Link to="/estufa-radio" className="btn-flat bg-est-green text-est-sand">
-              Estufa Radio
-            </Link>
+      {/* Hero com a arte oficial da Estufa Records */}
+      <section className="relative overflow-hidden border-b border-border bg-est-ink">
+        <img
+          src={bgAsset.url}
+          alt="Arte geométrica da Estufa Records: volumes vermelho, verde e amarelo sob céu azul"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-est-ink/45" />
+        <div className="relative mx-auto flex max-w-7xl flex-col gap-10 px-5 py-20 sm:py-28 lg:flex-row lg:items-center">
+          <div className="flex-1">
+            <p className="label-mono text-est-sand">Florianópolis · SC · Brasil</p>
+            <h1 className="mt-4 max-w-2xl text-5xl font-bold uppercase leading-[0.9] text-est-sand sm:text-7xl">
+              Estufa de
+              <br />
+              espécies raras
+            </h1>
+            <p className="mt-6 max-w-xl text-base text-est-sand sm:text-lg">
+              Gravadora independente de música eletrônica que trabalha nos subgêneros house, minimal,
+              electro e techno.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link to="/send-your-music" className="btn-flat bg-est-red text-est-sand">
+                Send your music
+              </Link>
+              <Link to="/artists" className="btn-flat bg-est-sand text-est-ink">
+                Artists
+              </Link>
+              <Link to="/estufa-radio" className="btn-flat bg-est-green text-est-sand">
+                Estufa Radio
+              </Link>
+            </div>
           </div>
+          <img
+            src={logoRedAsset.url}
+            alt="Logo da Estufa Records"
+            width={320}
+            height={320}
+            className="w-40 self-start border border-border sm:w-56 lg:w-72"
+          />
         </div>
       </section>
 
@@ -99,7 +100,7 @@ function Index() {
                     variant={release.art}
                     title={release.title}
                     artists={release.artists}
-                    className="block w-full border-b-2 border-foreground"
+                    className="block w-full border-b border-border"
                   />
                   <div className="p-3">
                     <h3 className="truncate text-sm font-bold uppercase">{release.title}</h3>
@@ -113,7 +114,7 @@ function Index() {
           <section className="grid gap-4 sm:grid-cols-3">
             {pages.map((item) => (
               <Link key={item.to} to={item.to} className="panel group p-5">
-                <span className={`block size-8 border-2 border-foreground ${item.color}`} />
+                <span className={`block size-8 border border-border ${item.color}`} />
                 <span className="label-mono mt-4 block group-hover:text-est-yellow">{item.label}</span>
                 <span className="mt-2 block text-sm text-muted-foreground">{item.desc}</span>
               </Link>
