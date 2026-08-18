@@ -67,7 +67,7 @@ function SendMusicPage() {
         <h2 className="text-3xl font-bold uppercase">FAQ</h2>
         <dl className="mt-6 space-y-5">
           {faq.map((item) => (
-            <div key={item.q} className="border-l-2 border-est-green pl-4">
+            <div key={item.q} className="border-l-2 border-est-red pl-4">
               <dt className="font-bold">{item.q}</dt>
               <dd className="mt-1 text-sm text-muted-foreground">{item.a}</dd>
             </div>

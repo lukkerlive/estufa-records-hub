@@ -3,17 +3,12 @@ import { ExternalLink } from "lucide-react";
 
 import { BeatportIcon } from "@/components/BeatportIcon";
 import { CoverArt } from "@/components/CoverArt";
-import { beatportUrl, releases, spotifySearchUrl } from "@/data/estufa";
-
-const swatches = ["bg-est-red", "bg-est-yellow", "bg-est-blue", "bg-est-green"];
+import { beatportUrl, releases, SPOTIFY_PLAYLIST_ID, spotifyUrl } from "@/data/estufa";
 
 export function ReleasesPanel() {
   const [selected, setSelected] = useState(0);
   const release = releases[selected] ?? releases[0]!;
-  const embed = release.spotifyId
-    ? `https://open.spotify.com/embed/${release.spotifyType ?? "track"}/${release.spotifyId}?theme=0`
-    : null;
-
+  const embed = `https://open.spotify.com/embed/playlist/${SPOTIFY_PLAYLIST_ID}?utm_source=generator&theme=0`;
 
   return (
     <aside className="panel lg:sticky lg:top-24">
@@ -23,42 +18,52 @@ export function ReleasesPanel() {
         <span className="label-mono text-est-yellow">Últimos lançamentos</span>
       </div>
 
-      {/* Player + compra do release selecionado */}
+      {/* Playlist oficial com todas as tracks da Estufa */}
       <div className="border-b border-border p-4">
-        {embed ? (
-          <iframe
-            title={`Spotify — ${release.title}`}
-            src={embed}
-            width="100%"
-            height="152"
-            loading="lazy"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            className="block w-full border border-border"
-          />
-        ) : (
-          <div className="flex items-center justify-between gap-3 border border-border bg-secondary/50 px-4 py-4">
-            <div className="min-w-0">
-              <p className="truncate text-sm font-bold uppercase">{release.title}</p>
-              <p className="truncate text-xs text-muted-foreground">{release.artists}</p>
-            </div>
-            <a
-              href={spotifySearchUrl(release)}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-flat shrink-0 bg-est-green text-est-sand"
-            >
-              Spotify <ExternalLink className="size-3" />
-            </a>
+        <iframe
+          title="Estufa Records — playlist oficial"
+          src={embed}
+          width="100%"
+          height="352"
+          loading="lazy"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          className="block w-full border border-border"
+        />
+      </div>
+
+      {/* Release selecionado + compra no Beatport */}
+      <div className="border-b border-border p-4">
+        <div className="flex items-center gap-3">
+          <span className="w-16 shrink-0 border border-border">
+            <CoverArt
+              variant={release.art}
+              cover={release.cover}
+              title={release.title}
+              artists={release.artists}
+              className="block h-full w-full"
+            />
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-sm font-bold uppercase">{release.title}</p>
+            <p className="truncate text-xs text-muted-foreground">{release.artists}</p>
           </div>
-        )}
+        </div>
         <div className="mt-3 flex gap-2">
+          <a
+            href={spotifyUrl(release)}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-flat flex-1 justify-center bg-est-green text-est-sand"
+          >
+            Spotify <ExternalLink className="size-3" />
+          </a>
           <a
             href={beatportUrl(release)}
             target="_blank"
             rel="noreferrer"
             className="btn-flat flex-1 justify-center bg-est-yellow text-est-ink"
           >
-            <BeatportIcon className="size-4" /> Comprar no Beatport
+            <BeatportIcon className="size-4" /> Beatport
           </a>
         </div>
       </div>
@@ -77,6 +82,7 @@ export function ReleasesPanel() {
               <span className="w-12 shrink-0 border border-border">
                 <CoverArt
                   variant={item.art}
+                  cover={item.cover}
                   title={item.title}
                   artists={item.artists}
                   className="block h-full w-full"
@@ -86,9 +92,7 @@ export function ReleasesPanel() {
                 <span className="block truncate text-sm font-bold uppercase">{item.title}</span>
                 <span className="block truncate text-xs text-muted-foreground">{item.artists}</span>
               </span>
-              <span
-                className={`size-2.5 shrink-0 ${swatches[i % swatches.length]} opacity-70 transition-opacity group-hover:opacity-100`}
-              />
+              <span className="size-2.5 shrink-0 bg-est-red opacity-70 transition-opacity group-hover:opacity-100" />
             </button>
           </li>
         ))}

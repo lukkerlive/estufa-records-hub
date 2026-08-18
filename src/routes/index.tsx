@@ -18,7 +18,8 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Estufa Records — gravadora independente" },
       {
         property: "og:description",
-        content: "Releases, artistas, Estufa Radio e envio de demos. House, minimal, electro e techno.",
+        content:
+          "Releases, artistas, Estufa Radio e envio de demos. House, minimal, electro e techno.",
       },
     ],
   }),
@@ -28,7 +29,12 @@ export const Route = createFileRoute("/")({
 const pages = [
   { to: "/artists", label: "Artists", desc: "Casting da gravadora", color: "bg-est-blue" },
   { to: "/estufa-radio", label: "Estufa Radio", desc: "Mixes e episódios", color: "bg-est-green" },
-  { to: "/send-your-music", label: "Send your music", desc: "Envie sua demo", color: "bg-est-yellow" },
+  {
+    to: "/send-your-music",
+    label: "Send your music",
+    desc: "Envie sua demo",
+    color: "bg-est-yellow",
+  },
 ] as const;
 
 function Index() {
@@ -53,8 +59,8 @@ function Index() {
               espécies raras
             </h1>
             <p className="mt-6 max-w-xl text-base text-est-sand sm:text-lg">
-              Gravadora independente de música eletrônica que trabalha nos subgêneros house, minimal,
-              electro e techno.
+              Gravadora independente de música eletrônica que trabalha nos subgêneros house,
+              minimal, electro e techno.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/send-your-music" className="btn-flat bg-est-red text-est-sand">
@@ -83,8 +89,8 @@ function Index() {
           <section>
             <h2 className="label-mono text-est-yellow">Nosso conceito</h2>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed">
-              A Estufa é uma gravadora independente de música eletrônica. Ambiente controlado, catálogo
-              cultivado com calma: arquitetura, paisagem e cores primárias em cada release.
+              A Estufa é uma gravadora independente de música eletrônica. Ambiente controlado,
+              catálogo cultivado com calma: arquitetura, paisagem e cores primárias em cada release.
             </p>
           </section>
 
@@ -98,6 +104,7 @@ function Index() {
                 <article key={release.title} className="panel">
                   <CoverArt
                     variant={release.art}
+                    cover={release.cover}
                     title={release.title}
                     artists={release.artists}
                     className="block w-full border-b border-border"
@@ -115,7 +122,9 @@ function Index() {
             {pages.map((item) => (
               <Link key={item.to} to={item.to} className="panel group p-5">
                 <span className={`block size-8 border border-border ${item.color}`} />
-                <span className="label-mono mt-4 block group-hover:text-est-yellow">{item.label}</span>
+                <span className="label-mono mt-4 block group-hover:text-est-yellow">
+                  {item.label}
+                </span>
                 <span className="mt-2 block text-sm text-muted-foreground">{item.desc}</span>
               </Link>
             ))}

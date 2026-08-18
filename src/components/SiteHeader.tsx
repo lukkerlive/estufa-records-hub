@@ -6,7 +6,11 @@ const nav = [
   { to: "/", label: "Home", color: "hover:bg-est-red hover:text-est-sand" },
   { to: "/artists", label: "Artists", color: "hover:bg-est-blue hover:text-est-sand" },
   { to: "/estufa-radio", label: "Estufa Radio", color: "hover:bg-est-green hover:text-est-sand" },
-  { to: "/send-your-music", label: "Send your music", color: "hover:bg-est-yellow hover:text-est-ink" },
+  {
+    to: "/send-your-music",
+    label: "Send your music",
+    color: "hover:bg-est-yellow hover:text-est-ink",
+  },
 ] as const;
 
 export function SiteHeader() {
@@ -22,9 +26,7 @@ export function SiteHeader() {
             height={36}
             className="size-9 shrink-0"
           />
-          <span className="label-mono text-base leading-none">
-            Estufa <span className="text-est-yellow">Records</span>
-          </span>
+          <span className="label-mono text-base leading-none text-foreground">Estufa Records</span>
         </Link>
         <nav className="flex flex-wrap items-center gap-2">
           {nav.map((item) => (

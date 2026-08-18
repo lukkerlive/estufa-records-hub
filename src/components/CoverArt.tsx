@@ -1,8 +1,25 @@
-type Props = { variant: number; title: string; artists?: string; className?: string };
+type Props = {
+  variant: number;
+  title: string;
+  artists?: string;
+  className?: string;
+  cover?: string | undefined;
+};
 
-// Capas geométricas modernistas em SVG, no espírito das artes da Estufa:
-// formas planas, cores primárias, arquitetura e paisagem estilizadas.
-export function CoverArt({ variant, title, artists, className }: Props) {
+// Usa a capa real (arquivo local) quando disponível; senão, cai na arte
+// geométrica modernista em SVG, no espírito das artes da Estufa.
+export function CoverArt({ variant, title, artists, className, cover }: Props) {
+  if (cover) {
+    return (
+      <img
+        src={cover}
+        alt={`Capa de ${title}${artists ? ` por ${artists}` : ""}`}
+        loading="lazy"
+        className={className}
+      />
+    );
+  }
+
   const v = ((variant % 8) + 8) % 8;
 
   return (
@@ -25,8 +42,14 @@ export function CoverArt({ variant, title, artists, className }: Props) {
       {v === 1 && (
         <>
           <rect width="300" height="300" fill="var(--est-ink)" />
-          <path d="M300 40 C170 40 60 140 60 300 L160 300 C160 190 220 120 300 120Z" fill="var(--est-blue)" />
-          <path d="M300 130 C230 130 165 195 165 300 L245 300 C245 220 265 190 300 190Z" fill="var(--est-red)" />
+          <path
+            d="M300 40 C170 40 60 140 60 300 L160 300 C160 190 220 120 300 120Z"
+            fill="var(--est-blue)"
+          />
+          <path
+            d="M300 130 C230 130 165 195 165 300 L245 300 C245 220 265 190 300 190Z"
+            fill="var(--est-red)"
+          />
           <circle cx="45" cy="255" r="16" fill="var(--est-green)" />
         </>
       )}
@@ -34,7 +57,10 @@ export function CoverArt({ variant, title, artists, className }: Props) {
         <>
           <rect width="300" height="300" fill="var(--est-sand)" />
           <circle cx="70" cy="60" r="60" fill="var(--est-yellow)" />
-          <path d="M0 130 L60 80 L120 130 L180 75 L240 130 L300 85 L300 160 L0 160Z" fill="var(--est-green)" />
+          <path
+            d="M0 130 L60 80 L120 130 L180 75 L240 130 L300 85 L300 160 L0 160Z"
+            fill="var(--est-green)"
+          />
           <path d="M100 190 L220 165 L250 205 L250 265 L100 265Z" fill="var(--est-yellow)" />
           <path d="M100 190 L100 265 L60 250 L60 205Z" fill="var(--est-red)" />
         </>

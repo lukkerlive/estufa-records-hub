@@ -18,8 +18,6 @@ export const Route = createFileRoute("/artists")({
   component: ArtistsPage,
 });
 
-const colors = ["bg-est-red", "bg-est-blue", "bg-est-yellow", "bg-est-green"];
-
 function ArtistsPage() {
   return (
     <div className="mx-auto max-w-7xl px-5 py-14">
@@ -31,18 +29,23 @@ function ArtistsPage() {
       </p>
 
       <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {artists.map((artist, i) => (
-          <li key={artist.name} className="panel p-5">
-            <div className="flex items-start justify-between gap-3">
+        {artists.map((artist) => (
+          <li key={artist.name} className="panel overflow-hidden">
+            <img
+              src={artist.photo}
+              alt={`Foto de ${artist.name}`}
+              loading="lazy"
+              className="block aspect-square w-full object-cover"
+            />
+            <div className="p-5">
               <h2 className="text-xl font-bold uppercase">{artist.name}</h2>
-              <span className={`size-6 shrink-0 border border-border ${colors[i % colors.length]}`} />
+              <p className="label-mono mt-4 text-muted-foreground">Releases</p>
+              <ul className="mt-2 space-y-1 text-sm">
+                {artist.releases.map((r) => (
+                  <li key={r}>{r}</li>
+                ))}
+              </ul>
             </div>
-            <p className="label-mono mt-4 text-muted-foreground">Releases</p>
-            <ul className="mt-2 space-y-1 text-sm">
-              {artist.releases.map((r) => (
-                <li key={r}>{r}</li>
-              ))}
-            </ul>
           </li>
         ))}
       </ul>
