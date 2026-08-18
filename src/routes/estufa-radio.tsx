@@ -1,8 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ExternalLink } from "lucide-react";
 
+import { BeatportIcon } from "@/components/BeatportIcon";
 import { CoverArt } from "@/components/CoverArt";
-import { radioShows, soundcloudSearchUrl, CONTACT_EMAIL } from "@/data/estufa";
+import { soundcloudEmbedUrl } from "@/lib/soundcloud";
+import { useI18n } from "@/lib/i18n";
+import {
+  beatportUrl,
+  releases,
+  radioShows,
+  soundcloudSearchUrl,
+  spotifyUrl,
+  CONTACT_EMAIL,
+} from "@/data/estufa";
 
 export const Route = createFileRoute("/estufa-radio")({
   head: () => ({
@@ -10,72 +20,125 @@ export const Route = createFileRoute("/estufa-radio")({
       { title: "Estufa Radio — mixes da gravadora" },
       {
         name: "description",
-        content: "Estufa Radio: série de mixes da Estufa Records com residentes e convidados.",
+        content:
+          "Estufa Radio: série de mixes da Estufa Records com residentes e convidados, além dos lançamentos oficiais.",
       },
       { property: "og:title", content: "Estufa Radio" },
-      { property: "og:description", content: "Série de mixes da Estufa Records." },
+      { property: "og:description", content: "Série de mixes e lançamentos da Estufa Records." },
     ],
   }),
   component: RadioPage,
 });
 
-function soundcloudEmbed(url: string) {
-  return `https://w.soundcloud.com/player/?url=${encodeURIComponent(url)}&color=%23d9c79a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false`;
-}
-
 function RadioPage() {
+  const { t } = useI18n();
+
   return (
     <div className="mx-auto max-w-7xl px-5 py-14">
-      <p className="label-mono text-est-yellow">Série de mixes</p>
-      <h1 className="mt-3 text-5xl font-bold uppercase sm:text-6xl">Estufa Radio</h1>
+      <p className="label-mono text-est-yellow">{t("radio_kicker")}</p>
+      <h1 className="mt-3 text-5xl font-bold uppercase sm:text-6xl">{t("radio_title")}</h1>
       <div className="rule-primaries mt-6 max-w-md" />
-      <p className="mt-6 max-w-xl text-muted-foreground">
-        Sessões gravadas por residentes e convidados da gravadora. House, minimal, electro e techno.
-      </p>
+      <p className="mt-6 max-w-xl text-muted-foreground">{t("radio_desc")}</p>
 
-      <ul className="mt-10 grid gap-4 lg:grid-cols-2">
-        {radioShows.map((show, i) => (
-          <li key={show.episode} className="panel">
-            <div className="flex items-stretch">
-              <div className="w-24 shrink-0 border-r border-border">
-                <CoverArt variant={i + 2} title={show.episode} className="block h-full w-full" />
+      <section className="mt-10">
+        <h2 className="label-mono text-est-red">{t("radio_sets")}</h2>
+        <ul className="mt-4 grid gap-4 lg:grid-cols-2">
+          {radioShows.map((show) => (
+            <li key={show.episode} className="panel">
+              <div className="flex items-stretch">
+                <div className="w-24 shrink-0 border-r border-border">
+                  <CoverArt variant={1} title={show.episode} className="block h-full w-full" />
+                </div>
+                <div className="flex flex-1 flex-col justify-center gap-1 p-5">
+                  <h2 className="text-lg font-bold uppercase">{show.episode}</h2>
+                  <p className="text-sm text-muted-foreground">{show.host}</p>
+                  <p className="label-mono mt-2 text-est-yellow">
+                    {show.focus} · {show.duration}
+                  </p>
+                </div>
               </div>
-              <div className="flex flex-1 flex-col justify-center gap-1 p-5">
-                <h2 className="text-lg font-bold uppercase">{show.episode}</h2>
-                <p className="text-sm text-muted-foreground">{show.host}</p>
-                <p className="label-mono mt-2 text-est-yellow">
-                  {show.focus} · {show.duration}
-                </p>
+              <div className="border-t border-border p-4">
+                {show.soundcloudUrl ? (
+                  <iframe
+                    title={`SoundCloud — ${show.episode}`}
+                    src={soundcloudEmbedUrl(show.soundcloudUrl)}
+                    width="100%"
+                    height="120"
+                    loading="lazy"
+                    allow="autoplay"
+                    className="block w-full border border-border"
+                  />
+                ) : (
+                  <a
+                    href={soundcloudSearchUrl(show)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-flat w-full justify-center bg-est-red text-est-sand"
+                  >
+                    {t("radio_listen")} <ExternalLink className="size-3" />
+                  </a>
+                )}
               </div>
-            </div>
-            <div className="border-t border-border p-4">
-              {show.soundcloudUrl ? (
-                <iframe
-                  title={`SoundCloud — ${show.episode}`}
-                  src={soundcloudEmbed(show.soundcloudUrl)}
-                  width="100%"
-                  height="120"
-                  loading="lazy"
-                  allow="autoplay"
-                  className="block w-full border border-border"
-                />
-              ) : (
-                <a
-                  href={soundcloudSearchUrl(show)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-flat w-full justify-center bg-est-red text-est-sand"
-                >
-                  Ouvir no SoundCloud <ExternalLink className="size-3" />
-                </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Lançamentos oficiais com capas + player SoundCloud quando lançados */}
+      <section className="mt-14">
+        <h2 className="label-mono text-est-red">{t("radio_releases")}</h2>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {releases.map((release) => (
+            <article key={`${release.title}-${release.catalog}`} className="panel overflow-hidden">
+              <CoverArt
+                variant={release.art}
+                cover={release.cover}
+                title={release.title}
+                artists={release.artists}
+                className="block w-full border-b border-border"
+              />
+              <div className="p-4">
+                <h3 className="truncate text-sm font-bold uppercase">{release.title}</h3>
+                <p className="truncate text-xs text-muted-foreground">{release.artists}</p>
+                <div className="mt-3 flex gap-2">
+                  <a
+                    href={spotifyUrl(release)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-flat flex-1 justify-center bg-est-green text-est-sand"
+                  >
+                    Spotify <ExternalLink className="size-3" />
+                  </a>
+                  <a
+                    href={beatportUrl(release)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-flat flex-1 justify-center bg-est-yellow text-est-ink"
+                  >
+                    <BeatportIcon className="size-4" /> Beatport
+                  </a>
+                </div>
+              </div>
+              {release.soundcloudUrl && (
+                <div className="border-t border-border p-4">
+                  <iframe
+                    title={`SoundCloud — ${release.title}`}
+                    src={soundcloudEmbedUrl(release.soundcloudUrl)}
+                    width="100%"
+                    height="120"
+                    loading="lazy"
+                    allow="autoplay"
+                    className="block w-full border border-border"
+                  />
+                </div>
               )}
-            </div>
-          </li>
-        ))}
-      </ul>
+            </article>
+          ))}
+        </div>
+      </section>
 
       <p className="mt-10 text-sm text-muted-foreground">
-        Quer apresentar um episódio? Escreva para{" "}
+        {t("radio_host_cta")}{" "}
         <a href={`mailto:${CONTACT_EMAIL}`} className="text-est-yellow hover:underline">
           {CONTACT_EMAIL}
         </a>

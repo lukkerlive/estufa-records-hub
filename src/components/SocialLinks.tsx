@@ -1,11 +1,13 @@
 import { Facebook, Instagram, Linkedin, Mail, Youtube } from "lucide-react";
 
+import { BeatportIcon } from "@/components/BeatportIcon";
 import type { SocialLink } from "@/data/estufa";
 
 type Props = {
   links: SocialLink[];
   className?: string;
   iconClassName?: string;
+  size?: "sm" | "md";
 };
 
 function SpotifyIcon({ className }: { className?: string }) {
@@ -41,9 +43,12 @@ const icons = {
   linkedin: Linkedin,
   whatsapp: WhatsAppIcon,
   email: Mail,
+  beatport: BeatportIcon,
 } as const;
 
-export function SocialLinks({ links, className, iconClassName }: Props) {
+export function SocialLinks({ links, className, iconClassName, size = "md" }: Props) {
+  const box = size === "sm" ? "size-7" : "size-9";
+  const icon = size === "sm" ? "size-3.5" : "size-4";
   return (
     <div className={className}>
       {links.map((link) => {
@@ -56,9 +61,9 @@ export function SocialLinks({ links, className, iconClassName }: Props) {
             rel="noreferrer"
             aria-label={link.label}
             title={link.label}
-            className="inline-flex size-9 items-center justify-center border border-border transition-colors hover:border-foreground hover:text-est-red"
+            className={`inline-flex ${box} items-center justify-center border border-border transition-colors hover:border-foreground hover:text-est-red`}
           >
-            <Icon className={iconClassName ?? "size-4"} />
+            <Icon className={iconClassName ?? icon} />
           </a>
         );
       })}

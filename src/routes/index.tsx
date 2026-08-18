@@ -1,10 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { CalendarDays, Newspaper, Radio, Send, Users } from "lucide-react";
 
 import bgAsset from "@/assets/estufa-bg.webp.asset.json";
 import logoRedAsset from "@/assets/estufa-logo-red.jpg.asset.json";
 import { CoverArt } from "@/components/CoverArt";
 import { ReleasesPanel } from "@/components/ReleasesPanel";
-import { CONTACT_EMAIL, releases } from "@/data/estufa";
+import { SocialLinks } from "@/components/SocialLinks";
+import { useI18n, type TranslationKey } from "@/lib/i18n";
+import { CONTACT_EMAIL, releases, socialLinks } from "@/data/estufa";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -19,25 +22,28 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Releases, artistas, Estufa Radio e envio de demos. House, minimal, electro e techno.",
+          "Releases, artistas, Estufa Radio, eventos e envio de demos. House, minimal, electro e techno.",
       },
     ],
   }),
   component: Index,
 });
 
-const pages = [
-  { to: "/artists", label: "Artists", desc: "Casting da gravadora", color: "bg-est-blue" },
-  { to: "/estufa-radio", label: "Estufa Radio", desc: "Mixes e episódios", color: "bg-est-green" },
-  {
-    to: "/send-your-music",
-    label: "Send your music",
-    desc: "Envie sua demo",
-    color: "bg-est-yellow",
-  },
-] as const;
+const pages: {
+  to: string;
+  labelKey: TranslationKey;
+  descKey: TranslationKey;
+  icon: typeof Users;
+}[] = [
+  { to: "/artists", labelKey: "nav_artists", descKey: "pages_artists_desc", icon: Users },
+  { to: "/estufa-radio", labelKey: "nav_radio", descKey: "pages_radio_desc", icon: Radio },
+  { to: "/eventos", labelKey: "nav_events", descKey: "pages_events_desc", icon: CalendarDays },
+  { to: "/send-your-music", labelKey: "nav_send", descKey: "pages_send_desc", icon: Send },
+  { to: "/news", labelKey: "nav_news", descKey: "pages_news_desc", icon: Newspaper },
+];
 
 function Index() {
+  const { t } = useI18n();
   const featured = releases.slice(0, 4);
 
   return (
@@ -52,27 +58,29 @@ function Index() {
         <div className="absolute inset-0 bg-est-ink/45" />
         <div className="relative mx-auto flex max-w-7xl flex-col gap-10 px-5 py-20 sm:py-28 lg:flex-row lg:items-center">
           <div className="flex-1">
-            <p className="label-mono text-est-sand">Florianópolis · SC · Brasil</p>
+            <p className="label-mono text-est-sand">{t("hero_city")}</p>
             <h1 className="mt-4 max-w-2xl text-5xl font-bold uppercase leading-[0.9] text-est-sand sm:text-7xl">
-              Estufa de
+              {t("hero_title_a")}
               <br />
-              espécies raras
+              {t("hero_title_b")}
             </h1>
-            <p className="mt-6 max-w-xl text-base text-est-sand sm:text-lg">
-              Gravadora independente de música eletrônica que trabalha nos subgêneros house,
-              minimal, electro e techno.
-            </p>
+            <p className="mt-6 max-w-xl text-base text-est-sand sm:text-lg">{t("hero_subtitle")}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/send-your-music" className="btn-flat bg-est-red text-est-sand">
-                Send your music
+                {t("hero_cta_send")}
               </Link>
               <Link to="/artists" className="btn-flat bg-est-sand text-est-ink">
-                Artists
+                {t("hero_cta_artists")}
               </Link>
               <Link to="/estufa-radio" className="btn-flat bg-est-green text-est-sand">
-                Estufa Radio
+                {t("hero_cta_radio")}
               </Link>
             </div>
+            <SocialLinks
+              links={socialLinks}
+              className="mt-10 flex flex-wrap gap-2"
+              iconClassName="size-4"
+            />
           </div>
           <img
             src={logoRedAsset.url}
@@ -87,17 +95,14 @@ function Index() {
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 lg:grid-cols-[1fr_400px]">
         <div className="space-y-12">
           <section>
-            <h2 className="label-mono text-est-yellow">Nosso conceito</h2>
-            <p className="mt-4 max-w-2xl text-lg leading-relaxed">
-              A Estufa é uma gravadora independente de música eletrônica. Ambiente controlado,
-              catálogo cultivado com calma: arquitetura, paisagem e cores primárias em cada release.
-            </p>
+            <h2 className="label-mono text-est-yellow">{t("concept_label")}</h2>
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed">{t("concept_text")}</p>
           </section>
 
           <section>
             <div className="flex items-baseline justify-between">
-              <h2 className="text-3xl font-bold uppercase">Destaques</h2>
-              <span className="label-mono text-muted-foreground">Estufa Records</span>
+              <h2 className="text-3xl font-bold uppercase">{t("featured_label")}</h2>
+              <span className="label-mono text-muted-foreground">{t("brand")}</span>
             </div>
             <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
               {featured.map((release) => (
@@ -118,21 +123,28 @@ function Index() {
             </div>
           </section>
 
-          <section className="grid gap-4 sm:grid-cols-3">
-            {pages.map((item) => (
-              <Link key={item.to} to={item.to} className="panel group p-5">
-                <span className={`block size-8 border border-border ${item.color}`} />
-                <span className="label-mono mt-4 block group-hover:text-est-yellow">
-                  {item.label}
-                </span>
-                <span className="mt-2 block text-sm text-muted-foreground">{item.desc}</span>
-              </Link>
-            ))}
+          <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {pages.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link key={item.to} to={item.to} className="panel group p-5">
+                  <span className="flex size-8 items-center justify-center border border-border text-est-red">
+                    <Icon className="size-4" aria-hidden="true" />
+                  </span>
+                  <span className="label-mono mt-4 block group-hover:text-est-yellow">
+                    {t(item.labelKey)}
+                  </span>
+                  <span className="mt-2 block text-sm text-muted-foreground">
+                    {t(item.descKey)}
+                  </span>
+                </Link>
+              );
+            })}
           </section>
 
           <section className="panel p-6">
-            <h2 className="text-2xl font-bold uppercase">Contato</h2>
-            <p className="mt-3 text-sm text-muted-foreground">demos / infos</p>
+            <h2 className="text-2xl font-bold uppercase">{t("contact_label")}</h2>
+            <p className="mt-3 text-sm text-muted-foreground">{t("contact_sub")}</p>
             <a
               href={`mailto:${CONTACT_EMAIL}`}
               className="mt-2 block break-all text-xl font-bold text-est-yellow hover:underline"

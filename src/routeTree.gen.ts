@@ -10,13 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as ArtistsRouteImport } from './routes/artists'
 import { Route as EstufaRadioRouteImport } from './routes/estufa-radio'
+import { Route as EventosRouteImport } from './routes/eventos'
+import { Route as NewsRouteImport } from './routes/news'
 import { Route as SendYourMusicRouteImport } from './routes/send-your-music'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArtistsRoute = ArtistsRouteImport.update({
@@ -29,6 +37,16 @@ const EstufaRadioRoute = EstufaRadioRouteImport.update({
   path: '/estufa-radio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventosRoute = EventosRouteImport.update({
+  id: '/eventos',
+  path: '/eventos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SendYourMusicRoute = SendYourMusicRouteImport.update({
   id: '/send-your-music',
   path: '/send-your-music',
@@ -37,35 +55,69 @@ const SendYourMusicRoute = SendYourMusicRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/artists': typeof ArtistsRoute
   '/estufa-radio': typeof EstufaRadioRoute
+  '/eventos': typeof EventosRoute
+  '/news': typeof NewsRoute
   '/send-your-music': typeof SendYourMusicRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/artists': typeof ArtistsRoute
   '/estufa-radio': typeof EstufaRadioRoute
+  '/eventos': typeof EventosRoute
+  '/news': typeof NewsRoute
   '/send-your-music': typeof SendYourMusicRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/artists': typeof ArtistsRoute
   '/estufa-radio': typeof EstufaRadioRoute
+  '/eventos': typeof EventosRoute
+  '/news': typeof NewsRoute
   '/send-your-music': typeof SendYourMusicRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/artists' | '/estufa-radio' | '/send-your-music'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/artists'
+    | '/estufa-radio'
+    | '/eventos'
+    | '/news'
+    | '/send-your-music'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/artists' | '/estufa-radio' | '/send-your-music'
-  id: '__root__' | '/' | '/artists' | '/estufa-radio' | '/send-your-music'
+  to:
+    | '/'
+    | '/about'
+    | '/artists'
+    | '/estufa-radio'
+    | '/eventos'
+    | '/news'
+    | '/send-your-music'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/artists'
+    | '/estufa-radio'
+    | '/eventos'
+    | '/news'
+    | '/send-your-music'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   ArtistsRoute: typeof ArtistsRoute
   EstufaRadioRoute: typeof EstufaRadioRoute
+  EventosRoute: typeof EventosRoute
+  NewsRoute: typeof NewsRoute
   SendYourMusicRoute: typeof SendYourMusicRoute
 }
 
@@ -76,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/artists': {
@@ -92,6 +151,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EstufaRadioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/eventos': {
+      id: '/eventos'
+      path: '/eventos'
+      fullPath: '/eventos'
+      preLoaderRoute: typeof EventosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/send-your-music': {
       id: '/send-your-music'
       path: '/send-your-music'
@@ -104,8 +177,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   ArtistsRoute: ArtistsRoute,
   EstufaRadioRoute: EstufaRadioRoute,
+  EventosRoute: EventosRoute,
+  NewsRoute: NewsRoute,
   SendYourMusicRoute: SendYourMusicRoute,
 }
 export const routeTree = rootRouteImport
