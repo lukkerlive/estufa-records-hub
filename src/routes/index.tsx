@@ -87,12 +87,39 @@ function ReleaseCarousel() {
 
   return (
     <section className="border-b border-border bg-est-ink">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-baseline justify-between gap-2 px-5 pt-8">
-        <h2 className="text-3xl font-bold uppercase text-est-sand">{t("releases_label")}</h2>
-        <span className="label-mono text-est-sand">{t("brand")}</span>
+      <div className="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-4 px-5 pb-6 pt-10">
+        <h2 className="text-4xl font-black uppercase leading-[0.85] tracking-tight text-est-sand sm:text-5xl">
+          {t("brand")}
+        </h2>
+        <div className="flex flex-col items-end gap-3">
+          <Link
+            to="/estufa-radio"
+            className="label-mono text-est-sand/60 transition-colors hover:text-est-yellow"
+          >
+            {t("releases_view_all")} →
+          </Link>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={prev}
+              aria-label="Anterior"
+              className="flex size-9 items-center justify-center border border-est-sand/40 text-est-sand transition-colors hover:bg-est-sand hover:text-est-ink"
+            >
+              <ChevronLeft className="size-5" aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              onClick={next}
+              aria-label="Próximo"
+              className="flex size-9 items-center justify-center border border-est-sand/40 text-est-sand transition-colors hover:bg-est-sand hover:text-est-ink"
+            >
+              <ChevronRight className="size-5" aria-hidden="true" />
+            </button>
+          </div>
+        </div>
       </div>
       <div
-        className="mx-auto mt-6 max-w-7xl overflow-hidden border-t border-border"
+        className="mx-auto max-w-7xl overflow-hidden border-t border-border"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
@@ -118,52 +145,23 @@ function ReleaseCarousel() {
                     cover={release.cover}
                     title={release.title}
                     artists={release.artists}
-                    className="block w-full border-b border-border"
+                    className="aspect-square w-full border-b border-border object-cover"
                   />
-                  <div className="p-2.5">
-                    <p className="truncate text-xs font-bold uppercase group-hover:text-est-yellow">
-                      {release.title}
-                    </p>
-                    <p className="truncate text-[11px] text-muted-foreground">{release.artists}</p>
+                  <div className="flex items-center gap-2 p-3">
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-bold uppercase group-hover:text-est-yellow">
+                        {release.title}
+                      </p>
+                      <p className="truncate text-xs text-muted-foreground">{release.artists}</p>
+                    </div>
+                    <span className="flex size-6 shrink-0 items-center justify-center border border-est-yellow/50 text-lg font-bold leading-none text-est-yellow transition-colors group-hover:bg-est-yellow group-hover:text-est-ink">
+                      +
+                    </span>
                   </div>
                 </a>
               ))}
             </div>
           ))}
-        </div>
-      </div>
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-5 pb-8">
-        <div className="flex gap-2">
-          {pages.map((_, p) => (
-            <button
-              key={p}
-              type="button"
-              onClick={() => setIndex(p)}
-              aria-label={`Página ${p + 1}`}
-              aria-current={p === index}
-              className={`size-3 border transition-colors ${
-                p === index ? "bg-est-red" : "border-foreground/40 hover:bg-secondary"
-              }`}
-            />
-          ))}
-        </div>
-        <div className="flex gap-2">
-          <button
-            type="button"
-            onClick={prev}
-            aria-label="Anterior"
-            className="btn-flat bg-est-sand px-3 py-2 text-est-ink"
-          >
-            <ChevronLeft className="size-4" aria-hidden="true" />
-          </button>
-          <button
-            type="button"
-            onClick={next}
-            aria-label="Próximo"
-            className="btn-flat bg-est-sand px-3 py-2 text-est-ink"
-          >
-            <ChevronRight className="size-4" aria-hidden="true" />
-          </button>
         </div>
       </div>
     </section>
