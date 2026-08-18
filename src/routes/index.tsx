@@ -1,5 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CalendarDays, Newspaper, Radio, Send, Users } from "lucide-react";
+import { useEffect, useState } from "react";
+import {
+  CalendarDays,
+  ChevronLeft,
+  ChevronRight,
+  Newspaper,
+  Radio,
+  Send,
+  Users,
+} from "lucide-react";
 
 import bgAsset from "@/assets/estufa-bg.webp.asset.json";
 import logoRedAsset from "@/assets/estufa-logo-red.jpg.asset.json";
@@ -13,6 +22,7 @@ import {
   releases,
   socialLinks,
   spotifyUrl,
+  type Release,
 } from "@/data/estufa";
 
 export const Route = createFileRoute("/")({
@@ -48,38 +58,120 @@ const pages: {
   { to: "/news", labelKey: "nav_news", descKey: "pages_news_desc", icon: Newspaper },
 ];
 
-function Index() {
-  const { t } = useI18n();
+const PER_PAGE = 4;
+const AUTO_MS = 5000;
 
-  const coverRow = (dup: number, ariaHidden: boolean) => (
-    <div key={dup} aria-hidden={ariaHidden} className="flex shrink-0">
-      {releases.map((release) => (
-        <div key={`${dup}-${release.title}`} className="w-56 shrink-0 pr-4 sm:w-64">
-          <a
-            href={beatportUrl(release) ?? spotifyUrl(release)}
-            target="_blank"
-            rel="noreferrer"
-            className="group block border border-border bg-card transition-colors hover:bg-secondary"
-          >
-            <CoverArt
-              variant={release.art}
-              cover={release.cover}
-              title={release.title}
-              artists={release.artists}
-              className="block w-full border-b border-border"
-            />
-            <div className="p-2.5">
-              <p className="truncate text-xs font-bold uppercase group-hover:text-est-yellow">
-                {release.title}
-              </p>
-              <p className="truncate text-[11px] text-muted-foreground">{release.artists}</p>
-            </div>
-          </a>
-        </div>
-      ))}
-    </div>
+function ReleaseCarousel() {
+  const { t } = useI18n();
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  const pages: Release[][] = Array.from(
+    { length: Math.ceil(releases.length / PER_PAGE) },
+    (_, p) => {
+      const start = p * PER_PAGE;
+      return Array.from({ length: PER_PAGE }, (_, i) => releases[(start + i) % releases.length]!);
+    },
   );
 
+  useEffect(() => {
+    if (paused) return;
+    const id = window.setInterval(() => {
+      setIndex((i) => (i + 1) % pages.length);
+    }, AUTO_MS);
+    return () => window.clearInterval(id);
+  }, [paused, pages.length]);
+
+  const prev = () => setIndex((index - 1 + pages.length) % pages.length);
+  const next = () => setIndex((index + 1) % pages.length);
+
+  return (
+    <section className="border-b border-border bg-est-ink">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-baseline justify-between gap-2 px-5 pt-8">
+        <h2 className="text-3xl font-bold uppercase text-est-sand">{t("releases_label")}</h2>
+        <span className="label-mono text-est-sand">{t("brand")}</span>
+      </div>
+      <div
+        className="mx-auto mt-6 max-w-7xl overflow-hidden border-t border-border"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <div
+          className="flex transition-transform duration-700 ease-in-out"
+          style={{ transform: `translateX(-${(index * 100) / pages.length}%)` }}
+        >
+          {pages.map((page, p) => (
+            <div
+              key={p}
+              className="grid w-full shrink-0 grid-cols-2 gap-4 px-5 py-8 sm:grid-cols-4"
+            >
+              {page.map((release) => (
+                <a
+                  key={`${p}-${release.title}`}
+                  href={beatportUrl(release) ?? spotifyUrl(release)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group block border border-border bg-card transition-colors hover:bg-secondary"
+                >
+                  <CoverArt
+                    variant={release.art}
+                    cover={release.cover}
+                    title={release.title}
+                    artists={release.artists}
+                    className="block w-full border-b border-border"
+                  />
+                  <div className="p-2.5">
+                    <p className="truncate text-xs font-bold uppercase group-hover:text-est-yellow">
+                      {release.title}
+                    </p>
+                    <p className="truncate text-[11px] text-muted-foreground">{release.artists}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-5 pb-8">
+        <div className="flex gap-2">
+          {pages.map((_, p) => (
+            <button
+              key={p}
+              type="button"
+              onClick={() => setIndex(p)}
+              aria-label={`Página ${p + 1}`}
+              aria-current={p === index}
+              className={`size-3 border transition-colors ${
+                p === index ? "bg-est-red" : "border-foreground/40 hover:bg-secondary"
+              }`}
+            />
+          ))}
+        </div>
+        <div className="flex gap-2">
+          <button
+            type="button"
+            onClick={prev}
+            aria-label="Anterior"
+            className="btn-flat bg-est-sand px-3 py-2 text-est-ink"
+          >
+            <ChevronLeft className="size-4" aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            onClick={next}
+            aria-label="Próximo"
+            className="btn-flat bg-est-sand px-3 py-2 text-est-ink"
+          >
+            <ChevronRight className="size-4" aria-hidden="true" />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Index() {
+  const { t } = useI18n();
   const embed = `https://open.spotify.com/embed/playlist/${SPOTIFY_PLAYLIST_ID}?utm_source=generator&theme=0`;
 
   return (
@@ -128,19 +220,8 @@ function Index() {
         </div>
       </section>
 
-      {/* Capas dos releases grandes, rodando em carrossel horizontal */}
-      <section className="border-b border-border bg-est-ink">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-baseline justify-between gap-2 px-5 pt-8">
-          <h2 className="text-3xl font-bold uppercase text-est-sand">{t("releases_label")}</h2>
-          <span className="label-mono text-est-sand">{t("brand")}</span>
-        </div>
-        <div className="mt-6 overflow-hidden border-t border-border py-8">
-          <div className="marquee-track flex w-max">
-            {coverRow(0, false)}
-            {coverRow(1, true)}
-          </div>
-        </div>
-      </section>
+      {/* Capas dos releases, 4 por vez, com auto-avanço */}
+      <ReleaseCarousel />
 
       <div className="mx-auto max-w-7xl space-y-12 px-5 py-14">
         <section>
