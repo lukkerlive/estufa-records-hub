@@ -24,6 +24,8 @@ export const releases: Release[] = [
     artists: "RAQUEZZI",
     art: 0,
     cover: "/covers/rave-na-sala.jpg",
+    spotifyId: "15vKkpp1XdUNzhKrsxAF9p",
+    spotifyType: "album",
     beatportUrl: "https://www.beatport.com/release/rave-na-sala/5061298",
   },
   {
@@ -54,8 +56,8 @@ export const releases: Release[] = [
     artists: "Raquel Zanella",
     art: 3,
     cover: "/covers/darwin.jpg",
-    spotifyId: "5jBG4bRaQDcL8exmxP4zDn",
-    spotifyType: "track",
+    spotifyId: "3nKQG85l006fRZm6wBkqA6",
+    spotifyType: "album",
     beatportUrl: "https://www.beatport.com/release/darwin/4608205",
     soundcloudUrl: "https://soundcloud.com/estufarec/sets/darwin-ep-raquel-zanella",
   },
@@ -75,6 +77,8 @@ export const releases: Release[] = [
     artists: "Lapax",
     art: 5,
     cover: "/covers/nave-mulher.jpg",
+    spotifyId: "6TG5nwhsiSmxom93Szp4qs",
+    spotifyType: "album",
     beatportUrl: "https://www.beatport.com/release/nave-mulher/3353833",
   },
   {
@@ -83,6 +87,8 @@ export const releases: Release[] = [
     artists: "Fran Trelles",
     art: 6,
     cover: "/covers/low-tide.jpg",
+    spotifyId: "49gWguR3s9po73okemDOQG",
+    spotifyType: "album",
     beatportUrl: "https://www.beatport.com/release/low-tide/3154489",
   },
   {
@@ -91,6 +97,8 @@ export const releases: Release[] = [
     artists: "Lexmic",
     art: 7,
     cover: "/covers/cape-town.jpg",
+    spotifyId: "64DXWw0n8v50biVLqAE21U",
+    spotifyType: "album",
     beatportUrl: "https://www.beatport.com/release/cape-town/3139157",
   },
   {
@@ -109,6 +117,8 @@ export const releases: Release[] = [
     artists: "Mateus G",
     art: 1,
     cover: "/covers/concreto.jpg",
+    spotifyId: "5hSoaHtrwY67NAHUgBCa2w",
+    spotifyType: "album",
     beatportUrl: "https://www.beatport.com/release/concreto/3111813",
     soundcloudUrl: "https://soundcloud.com/estufarec/sets/concreto-ep",
   },
@@ -179,6 +189,8 @@ export const releases: Release[] = [
     artists: "Alef the Boy, Augusto Klaus",
     art: 0,
     cover: "/covers/predial.jpg",
+    spotifyId: "2xgjrNFyWLWyxZ7trLeTPw",
+    spotifyType: "album",
     beatportUrl: "https://www.beatport.com/release/predial/2398409",
   },
   {
@@ -187,6 +199,8 @@ export const releases: Release[] = [
     artists: "Noizzed, Marc-lo, (duo)tone",
     art: 1,
     cover: "/covers/colheita.jpg",
+    spotifyId: "6uNZkvPfbDm5rX3P1aFvdf",
+    spotifyType: "album",
     beatportUrl: "https://www.beatport.com/release/colheita/2340586",
   },
 ];
