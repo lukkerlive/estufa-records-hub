@@ -213,6 +213,7 @@ export const artists: Artist[] = [
     socials: {
       soundcloud: "https://soundcloud.com/raquezzi-djs",
       beatport: "https://www.beatport.com/artist/raquezzi/1310733",
+      instagram: "https://www.instagram.com/raquezzi_",
     },
   },
   {
@@ -237,6 +238,7 @@ export const artists: Artist[] = [
     socials: {
       soundcloud: "https://soundcloud.com/raquel_zanella",
       beatport: "https://www.beatport.com/artist/raquel-zanella/1215461",
+      instagram: "https://www.instagram.com/araquelzanella",
     },
   },
   {
@@ -256,6 +258,7 @@ export const artists: Artist[] = [
     socials: {
       soundcloud: "https://soundcloud.com/lapaxmusic",
       beatport: "https://www.beatport.com/artist/lapax/959675",
+      instagram: "https://www.instagram.com/lapaxmusic",
     },
   },
   {
@@ -265,6 +268,7 @@ export const artists: Artist[] = [
     socials: {
       soundcloud: "https://soundcloud.com/ftrelles",
       beatport: "https://www.beatport.com/artist/fran-trelles/750545",
+      instagram: "https://www.instagram.com/frntrelles",
     },
   },
   {
@@ -284,6 +288,7 @@ export const artists: Artist[] = [
     socials: {
       soundcloud: "https://soundcloud.com/morganaparel",
       beatport: "https://www.beatport.com/artist/morgana-parel/847051",
+      instagram: "https://www.instagram.com/sangredesquiciada",
     },
   },
   {
@@ -293,6 +298,7 @@ export const artists: Artist[] = [
     socials: {
       soundcloud: "https://soundcloud.com/mateusmga",
       beatport: "https://www.beatport.com/artist/mateus-g/430002",
+      instagram: "https://www.instagram.com/mateusmga",
     },
   },
   {
@@ -361,6 +367,7 @@ export const artists: Artist[] = [
     socials: {
       soundcloud: "https://soundcloud.com/augustoklaus",
       beatport: "https://www.beatport.com/artist/augusto-klaus/701520",
+      instagram: "https://www.instagram.com/augustoklaus",
     },
   },
   {
@@ -370,6 +377,7 @@ export const artists: Artist[] = [
     socials: {
       soundcloud: "https://soundcloud.com/officialc-lo",
       beatport: "https://www.beatport.com/artist/marc-lo/702780",
+      instagram: "https://www.instagram.com/marc_lof",
     },
   },
   {
@@ -385,6 +393,7 @@ export const artists: Artist[] = [
     socials: {
       soundcloud: "https://soundcloud.com/noizzedofficial",
       beatport: "https://www.beatport.com/artist/noizzed/491379",
+      instagram: "https://www.instagram.com/noizzed",
     },
   },
 ];
