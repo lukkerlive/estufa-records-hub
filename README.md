@@ -1,14 +1,21 @@
-# Welcome to your Lovable project
+# Estufa Records Hub
+
+Esse é o tumblr da estufa records
+quero criar uma nova landpage pra estufa records
+onde vai ter menus de releases lado direito destacado
+botões que levam a outras paginas > Artists > Estufa Radio > Send your music
+
+quero também orientação para deixar esse site online
 
 This project was built with [Lovable](https://lovable.dev).
 
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/620e3191-d60f-47bd-927d-ae43f8aa44b4).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +27,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
