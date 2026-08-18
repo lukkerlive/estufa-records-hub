@@ -4,13 +4,22 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Fonte oficial da Estufa Records */
+@font-face {
+  font-family: "OCR A Std";
+  src: url("/__l5e/assets-v1/3030d67e-0059-484f-9c4a-35adf3b20f91/OCRAStd.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme inline {
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
   --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Space Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-mono: "OCR A Std", ui-monospace, SFMono-Regular, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -67,8 +76,8 @@
   --accent-foreground: oklch(0.2 0.01 90);
   --destructive: var(--est-red);
   --destructive-foreground: oklch(0.98 0.005 90);
-  --border: oklch(0.38 0.005 250);
-  --input: oklch(0.38 0.005 250);
+  --border: oklch(0.35 0.004 250 / 55%);
+  --input: oklch(0.35 0.004 250 / 55%);
   --ring: var(--est-yellow);
 
   --gradient-primaries: linear-gradient(
@@ -115,20 +124,19 @@
 
 @utility rule-primaries {
   background-image: var(--gradient-primaries);
-  height: 6px;
+  height: 3px;
 }
 
 @utility panel {
   background-color: var(--color-card);
-  border: 2px solid var(--color-foreground);
-  box-shadow: 8px 8px 0 0 var(--est-ink);
+  border: 1px solid color-mix(in oklab, var(--foreground) 18%, transparent);
 }
 
 @utility btn-flat {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  border: 2px solid var(--color-foreground);
+  border: 1px solid color-mix(in oklab, var(--foreground) 25%, transparent);
   padding: 0.75rem 1.25rem;
   font-family: var(--font-mono);
   font-size: 0.6875rem;
@@ -138,15 +146,13 @@
     transform 120ms ease,
     box-shadow 120ms ease,
     background-color 120ms ease;
-  box-shadow: 5px 5px 0 0 var(--est-ink);
 
   &:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 7px 7px 0 0 var(--est-ink);
+    transform: translateY(-1px);
+    filter: brightness(1.06);
   }
 
   &:active {
-    transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0 0 var(--est-ink);
+    transform: translateY(1px);
   }
 }
