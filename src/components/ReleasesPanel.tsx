@@ -10,9 +10,10 @@ const swatches = ["bg-est-red", "bg-est-yellow", "bg-est-blue", "bg-est-green"];
 export function ReleasesPanel() {
   const [selected, setSelected] = useState(0);
   const release = releases[selected] ?? releases[0]!;
-
+  const embed = release.spotifyId
     ? `https://open.spotify.com/embed/${release.spotifyType ?? "track"}/${release.spotifyId}?theme=0`
     : null;
+
 
   return (
     <aside className="panel lg:sticky lg:top-24">
