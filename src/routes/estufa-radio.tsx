@@ -47,7 +47,12 @@ function RadioPage() {
             <li key={show.episode} className="panel">
               <div className="flex items-stretch">
                 <div className="w-24 shrink-0 border-r border-border">
-                  <CoverArt variant={1} title={show.episode} className="block h-full w-full" />
+                  <CoverArt
+                    variant={1}
+                    cover={show.cover}
+                    title={show.episode}
+                    className="block h-full w-full"
+                  />
                 </div>
                 <div className="flex flex-1 flex-col justify-center gap-1 p-5">
                   <h2 className="text-lg font-bold uppercase">{show.episode}</h2>

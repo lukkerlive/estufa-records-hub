@@ -396,6 +396,8 @@ export type RadioShow = {
   duration: string;
   /** URL do set no SoundCloud — habilita o player. */
   soundcloudUrl?: string;
+  /** Capa real do set (arquivo local em /public/covers). */
+  cover?: string;
 };
 
 export const radioShows: RadioShow[] = [
@@ -413,6 +415,7 @@ export const radioShows: RadioShow[] = [
     host: "noizzed, arnt",
     focus: "podcast",
     duration: "mix",
+    cover: "/covers/podcast-noizzed-arnt.jpg",
     soundcloudUrl: "https://soundcloud.com/estufarec/noizzed-arnt",
   },
 ];
