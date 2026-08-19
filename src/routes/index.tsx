@@ -2,8 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { CalendarDays, ChevronLeft, ChevronRight, Radio, Send, Users } from "lucide-react";
 
-import bgAsset from "@/assets/estufa-bg.webp.asset.json";
-import logoRedAsset from "@/assets/estufa-logo-red.jpg.asset.json";
 import { CoverArt } from "@/components/CoverArt";
 import { SocialLinks } from "@/components/SocialLinks";
 import { useI18n, type TranslationKey } from "@/lib/i18n";
@@ -168,7 +166,7 @@ function Index() {
       {/* Hero com a arte oficial da Estufa Records */}
       <section className="relative overflow-hidden border-b border-border bg-est-ink">
         <img
-          src={bgAsset.url}
+          src="/brand/estufa-bg.webp"
           alt="Arte geométrica da Estufa Records: volumes vermelho, verde e amarelo sob céu azul"
           className="absolute inset-0 h-full w-full object-cover"
         />
@@ -200,7 +198,7 @@ function Index() {
             />
           </div>
           <img
-            src={logoRedAsset.url}
+            src="/brand/estufa-logo-red.jpg"
             alt="Logo da Estufa Records"
             width={320}
             height={320}

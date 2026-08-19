@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 
-import markAsset from "@/assets/estufa-mark.png.asset.json";
 import { useI18n, type Lang } from "@/lib/i18n";
 import type { TranslationKey } from "@/lib/i18n";
 
@@ -37,7 +36,7 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-5 py-4">
         <Link to="/" className="flex items-center gap-3">
           <img
-            src={markAsset.url}
+            src="/brand/estufa-mark.png"
             alt="Símbolo da Estufa Records"
             width={36}
             height={36}
