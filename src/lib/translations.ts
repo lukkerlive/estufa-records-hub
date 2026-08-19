@@ -36,14 +36,14 @@ export const translations = {
     artists_kicker: "Casting",
     artists_title: "Artists",
     artists_desc:
-      "Espécies raras cultivadas na estufa — produtores e DJs presentes no catálogo da gravadora.",
+      "Espécies raras cultivadas na estufa — produtores e DJs presentes no catálogo da\u00a0gravadora.",
     artists_releases_label: "Releases",
     artists_cta: "Quer fazer parte do casting? Envie sua demo para",
 
     radio_kicker: "Série de mixes",
     radio_title: "Estufa Radio",
     radio_desc:
-      "Sessões gravadas por residentes e convidados da gravadora. House, minimal, electro e techno.",
+      "Sessões gravadas por residentes e convidados da gravadora. House, minimal,\u00a0electro e techno.",
     radio_sets: "Sets",
     radio_releases: "Lançamentos oficiais",
     radio_listen: "Ouvir no SoundCloud",
@@ -86,7 +86,8 @@ export const translations = {
 
     cena_kicker: "Agenda & Imprensa",
     cena_title: "Cena",
-    cena_desc: "Workshops, masterclasses, showcases e novidades — o que estamos fazendo na cena.",
+    cena_desc:
+      "Workshops, masterclasses, showcases e novidades — o que estamos fazendo na\u00a0cena.",
     events_upcoming: "Próximos",
     events_upcoming_none: "Próximos eventos em breve — siga nosso Instagram para novidades.",
     events_past: "Realizados",
@@ -135,14 +136,15 @@ export const translations = {
 
     artists_kicker: "Casting",
     artists_title: "Artists",
-    artists_desc: "Rare species grown in the greenhouse — producers and DJs on the label catalog.",
+    artists_desc:
+      "Rare species grown in the greenhouse — producers and DJs on the label\u00a0catalog.",
     artists_releases_label: "Releases",
     artists_cta: "Want to join the roster? Send your demo to",
 
     radio_kicker: "Mix series",
     radio_title: "Estufa Radio",
     radio_desc:
-      "Sessions recorded by residents and guests of the label. House, minimal, electro and techno.",
+      "Sessions recorded by residents and guests of the label. House, minimal,\u00a0electro and techno.",
     radio_sets: "Sets",
     radio_releases: "Official releases",
     radio_listen: "Listen on SoundCloud",
@@ -185,7 +187,7 @@ export const translations = {
 
     cena_kicker: "Events & Press",
     cena_title: "Scene",
-    cena_desc: "Workshops, masterclasses, showcases and news — what we're doing in the scene.",
+    cena_desc: "Workshops, masterclasses, showcases and news — what we're doing in the\u00a0scene.",
     events_upcoming: "Upcoming",
     events_upcoming_none: "New events coming soon — follow our Instagram for updates.",
     events_past: "Past events",

@@ -78,7 +78,7 @@ function ReleaseCarousel() {
     <section className="border-b border-border bg-est-ink">
       <div className="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-4 px-5 pb-6 pt-10">
         <h2 className="text-4xl font-black uppercase leading-[0.85] tracking-tight text-est-sand sm:text-5xl">
-          {t("brand")}
+          {t("releases_label")}
         </h2>
         <div className="flex flex-col items-end gap-3">
           <Link
@@ -253,16 +253,16 @@ function Index() {
             <span className="label-mono text-est-sand">{t("playlist_sub")}</span>
           </div>
           <div className="rule-primaries mt-4 max-w-md" />
-          <iframe
-            title="Estufa Records — playlist oficial"
-            src={embed}
-            width="100%"
-            height="352"
-            loading="lazy"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            className="mt-6 block w-full border border-border"
-          />
         </div>
+        <iframe
+          title="Estufa Records — playlist oficial"
+          src={embed}
+          width="100%"
+          height="352"
+          loading="lazy"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          className="mt-6 block h-[352px] w-full border-y border-border"
+        />
       </section>
     </div>
   );

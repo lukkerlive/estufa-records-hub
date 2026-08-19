@@ -429,6 +429,7 @@ export const radioShows: RadioShow[] = [
     host: "Le Calve",
     focus: "podcast",
     duration: "mix",
+    cover: "/covers/podcast-le-calve.jpg",
     soundcloudUrl: "https://soundcloud.com/estufarec/podacast-01-le-calve",
   },
   {
@@ -444,6 +445,7 @@ export const radioShows: RadioShow[] = [
     host: "Moka & Silvy",
     focus: "podcast",
     duration: "mix",
+    cover: "/covers/podcast-moka-silvy.jpg",
     soundcloudUrl: "https://soundcloud.com/estufarec/mokasilvy",
   },
 ];

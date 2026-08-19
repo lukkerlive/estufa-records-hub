@@ -42,7 +42,7 @@ export function SiteFooter() {
         </div>
 
         <div className="flex flex-col gap-3">
-          <p className="label-mono text-est-red">Ouça / Listen</p>
+          <p className="label-mono text-est-red">Follow</p>
           <SocialLinks links={socialLinks} className="flex flex-wrap gap-2" />
         </div>
       </div>
