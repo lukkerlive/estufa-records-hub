@@ -253,16 +253,16 @@ function Index() {
             <span className="label-mono text-est-sand">{t("playlist_sub")}</span>
           </div>
           <div className="rule-primaries mt-4 max-w-md" />
+          <iframe
+            title="Estufa Records — playlist oficial"
+            src={embed}
+            width="100%"
+            height="600"
+            loading="lazy"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            className="mt-6 block h-[600px] w-full border border-border"
+          />
         </div>
-        <iframe
-          title="Estufa Records — playlist oficial"
-          src={embed}
-          width="100%"
-          height="352"
-          loading="lazy"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          className="mt-6 block h-[352px] w-full border-y border-border"
-        />
       </section>
     </div>
   );
